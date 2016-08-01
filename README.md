@@ -31,11 +31,11 @@ This version will not support the following features:
 Main Page with folder and tag links displayed on the sidebar. The main nav bar at the top of the screen will contain the add button and the search feature (real-time in 2.0). The add button will display a form (overlay in 2.0) that will take the place of the main content of the page. The form will take in a title, url, description and screenshot url (upload straight in in 2.0). The latest content will be display first in the page in a tiling format.
 
 #### Main page (titled bookmarks): 
-![wireframe](https://wireframe.cc/tu0eVS)
+[wireframe](https://wireframe.cc/tu0eVS)
 #### Individual bookmark: 
-![wireframe](https://wireframe.cc/1eXhiG)
+[wireframe](https://wireframe.cc/1eXhiG)
 #### Adding a bookmark form: 
-![wireframe](https://wireframe.cc/WNbziz)
+[wireframe](https://wireframe.cc/WNbziz)
 
 ### Components
 
