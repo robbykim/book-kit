@@ -19,19 +19,19 @@ var BookmarkTiles = React.createClass({
         <ul>
           {/* {tileArr} */}
 
-          <li class="bookmark-tile">
+          <li className="bookmark-tile">
             <a href='#'>
               <h3>Bookmark Title</h3>
               <img src="./IC688499.png" alt="placeholder-image"/>
             </a>
           </li>
-          <li class="bookmark-tile">
+          <li className="bookmark-tile">
             <a href='#'>
               <h3>Bookmark Title</h3>
               <img src="./IC688499.png" alt="placeholder-image"/>
             </a>
           </li>
-          <li class="bookmark-tile">
+          <li className="bookmark-tile">
             <a href='#'>
               <h3>Bookmark Title</h3>
               <img src="./IC688499.png" alt="placeholder-image"/>
