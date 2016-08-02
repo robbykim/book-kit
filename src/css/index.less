@@ -1,61 +1,55 @@
 * {
   font-family: Helvetica, sans-serif;
 }
-
 // look into flexbox
-
 .hidden {
   display: none;
 }
-
-header {
-  height: 2rem;
-  border-bottom: 2px solid grey;
-  margin-bottom: 1rem;
-  nav {
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  header {
+    border-bottom: 2px solid grey;
+    margin-bottom: 1rem;
+    nav {
+      display: flex;
+      max-width: 65%;
+      margin: 0 auto;
+      align-content: center;
+      padding: 1rem 0;
+      justify-content: space-between;
+      form {
+        display: inline-block;
+      }
+    }
+  }
+  #body {
     max-width: 65%;
     margin: 0 auto;
-    div {
+    display: flex;
+    justify-content: center;
+    .sidebar-nav {
+      // flex: 0 0 12em;
+      order: -1;
+      flex-basis: 12em;
+      h2 {
+        display: inline-block;
+      }
+      ul {
+        margin-bottom: 1rem;
+      }
+    }
+    .tile-section {
       float: right;
-      margin: 0.4rem 0;
     }
-    h1 {
-      margin: 0.5rem 0;
-    }
-    form,
-    h1 {
+    .bookmark-tile {
       display: inline-block;
+      a {
+        img {
+          height: 10rem;
+        }
+      }
     }
   }
-}
-
-.sidebar-nav {
-  position:absolute;
-  top: 3rem;
-  bottom: 0;
-  width: 10rem;
-  h2 {
-    display: inline-block;
-  }
-  ul {
-    margin-bottom: 1rem;
-  }
-}
-
-.tile-section {
-  float: right;
-}
-
-.bookmark-tile {
-  display: inline-block;
-  a {
-    img {
-      height: 10rem;
-    }
-  }
-}
-
-#body {
-  max-width: 65%;
-  margin: 0 auto;
 }
