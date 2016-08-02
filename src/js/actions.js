@@ -210,3 +210,13 @@ var confirmDeleteBookmark = function(  ) {
     type: actionTypes.CONFIRM_DELETE_BOOKMARK
   };
 };
+
+exports.addBookmark = addBookmark;
+exports.addFolder = addFolder;
+exports.getBookmarks = getBookmarks;
+exports.getFolders = getFolders;
+exports.getBookmarksByFolder = getBookmarksByFolder;
+exports.getBookmarksByTag = getBookmarksByTag;
+exports.editBookmark = editBookmark;
+exports.deleteBookmark = deleteBookmark;
+exports.confirmDeleteBookmark = confirmDeleteBookmark;
