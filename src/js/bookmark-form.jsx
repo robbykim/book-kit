@@ -1,12 +1,16 @@
-var React = require('react');
+const React = require('react');
+const router = require('react-router');
+const Link = router.Link;
 
-var BookmarkForm = React.createClass({
+const BookmarkForm = React.createClass({
   render: function () {
     return (
-      <section className="add-bookmark-section hidden">
+      <section className="add-bookmark-section">
         <form>
           <h1>Enter a New Bookmark</h1>
-          <button className="close-window">X</button>
+          <Link to={'/'}>
+            <button className="close-window">X</button>
+          </Link>
           <h3>Title</h3>
           <input type="text" required />
           <h3>URL</h3>

@@ -1,7 +1,8 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var PageContainer = require('./page-container');
+const React = require('react');
+const ReactDOM = require('react-dom');
+const PageContainer = require('./page-container');
+const routes = require('./routes/routes');
 
 document.addEventListener('DOMContentLoaded', function () {
-  ReactDOM.render(<PageContainer />, document.getElementById('app'));
+  ReactDOM.render(routes, document.getElementById('app'));
 });

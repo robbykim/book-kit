@@ -1,13 +1,17 @@
-var React = require('react');
+const React = require('react');
+const router = require('react-router');
+const Link = router.Link;
 
-var Navbar = React.createClass({
+const Navbar = React.createClass({
   render: function() {
     return (
       <header>
         <nav>
           <h1 className="main-logo">Bookmark Project</h1>
           <div>
-            <button className="add-bookmark">+</button>
+            <Link to={'/add'}>
+              <button className="add-bookmark">+</button>
+            </Link>
             <form>
               <input type="text" placeholder="Search..." className="search-bar"/>
             </form>

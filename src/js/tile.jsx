@@ -1,13 +1,17 @@
-var React = require('react');
+const React = require('react');
+const router = require('react-router');
+const Link = router.Link;
 
-var Tile = React.createClass({
+const Tile = React.createClass({
   render: function () {
-    // TODO: add this.props.onFocus
+    // TODO: pass the bookmark ID to Tile 
     return (
-      <li className="bookmark-tile" onClick={this.props.onFocus}>
-        <h3>{this.props.title}</h3>
-        <img src={this.props.screenshot} alt={this.props.title} />
-      </li>
+      <Link to={'/' + bookmarkId}>
+        <li className="bookmark-tile">
+          <h3>{this.props.title}</h3>
+          <img src={this.props.screenshot} alt={this.props.title} />
+        </li>
+      </Link>
     );
   }
 });

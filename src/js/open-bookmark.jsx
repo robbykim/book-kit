@@ -3,7 +3,7 @@ var React = require('react');
 var OpenBookmark = React.createClass({
   render: function () {
     return (
-      <section className="bookmark-section hidden">
+      <section className="bookmark-section">
         <h1>Bookmark Title</h1>
         <h2>https://www.example.com</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam dignissimos praesentium vel atque ducimus obcaecati quia, quis libero repellat quaerat itaque numquam est provident. Officia necessitatibus quam est perferendis nam.</p>
