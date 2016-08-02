@@ -1,13 +1,13 @@
 {
   "name": "bookmarks-fullstack",
   "version": "1.0.0",
-  "description": "## Functional Specification",
+  "description": "Bookmark Project",
   "main": "src/js/index.jsx",
   "scripts": {
     "test": "mocha --compilers js:babel-register test/**/*.js*",
     "mkdir": "mkdir -p build",
-    "build": "npm run clean && npm run mkdir && npm run build:html && npm run build:css && npm run build:js",
-    "watch": "npm run watch:html & npm run watch:js",
+    "build": "npm run clean && npm run mkdir && npm run build:html && npm run build:css && npm run build:img && npm run build:js",
+    "watch": "npm run watch:html & npm run watch:css & npm run watch:img & npm run watch:js",
     "clean": "rm -rf build",
     "build:html": "npm run clean:html && cp src/index.html build/",
     "watch:html": "npm run build:html && chokidar src/index.html -c 'npm run build:html'",
@@ -17,7 +17,10 @@
     "clean:css": "rm -f build/style.css build/reset.css",
     "build:js": "npm run clean:js && webpack",
     "watch:js": "npm run build:js && webpack --watch",
-    "clean:js": "rm -f build/$npm_package_name.$npm_package_version.js"
+    "clean:js": "rm -f build/$npm_package_name.$npm_package_version.js",
+    "build:img": "npm run clean:img && cp -r src/img/ build/",
+    "clean:img": "rm -rf build/img/",
+    "watch:img": "npm run build:img && webpack --watch"
   },
   "repository": {
     "type": "git",

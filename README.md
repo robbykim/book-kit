@@ -30,11 +30,11 @@ This version will not support the following features:
 
 Main Page with folder and tag links displayed on the sidebar. The main nav bar at the top of the screen will contain the add button and the search feature (real-time in 2.0). The add button will display a form (overlay in 2.0) that will take the place of the main content of the page. The form will take in a title, url, description and screenshot url (upload straight in in 2.0). The latest content will be display first in the page in a tiling format.
 
-#### Main page (titled bookmarks): 
+#### Main page (titled bookmarks):
 [wireframe](https://wireframe.cc/tu0eVS)
-#### Individual bookmark: 
+#### Individual bookmark:
 [wireframe](https://wireframe.cc/1eXhiG)
-#### Adding a bookmark form: 
+#### Adding a bookmark form:
 [wireframe](https://wireframe.cc/WNbziz)
 
 ### Components
@@ -51,8 +51,14 @@ Form will have inputs for url (req), title (req), description, screenshot, folde
 Side Bar -
 Will have a list of folders and tags that you can select in order to filter the results based on those folders/tags. You can select only one folder at a time but can select multiple tags at a time. 2.0 will feature a scroll bar.
 
+Add Folder -
+Will display a text input and be able to add a new folder
+
 Bookmark Tile -
 Will show url, title, description, screenshot, have options to add tags / add to folder and also to edit/delete options. Tags optional. Folders required. Duplicates not allowed (tiles with duplicate URLs).
+
+Edit Button -
+Should take the bookmark tile and turn the text fields into input fields available to change.
 
 Folders -
 You will be able to add new folders on the sidebar
@@ -60,14 +66,14 @@ You will be able to add new folders on the sidebar
 Tags -
 You will only be able to add new tags while editing/adding a bookmark.
 
-STORING:
--url
--title
--descriptions
--tags
--folder
--screenshot (url)
--User (2.0)
+Database is storing:
+* url
+* title
+* descriptions
+* tags
+* folder
+* screenshot (url)
+* User (2.0)
 
 version 1.0
 -----------
