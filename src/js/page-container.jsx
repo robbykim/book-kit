@@ -13,6 +13,7 @@ var PageContainer = React.createClass({
         <section className="main-section">
           <Sidebar/>
           <div className="content">
+          {/* need to pass in bookmarks from api call to BookmarkTiles */}
             <BookmarkTiles/>
             <OpenBookmark/>
             <BookmarkForm/>
