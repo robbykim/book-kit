@@ -2,10 +2,11 @@
 <html lang="en">
 
 <head>
+	<title>Bookmark Project</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Bookmark Project</title>
+
 	<link rel="stylesheet" href="reset.css">
 	<link rel="stylesheet" href="bookmarks-fullstack.1.0.0.css">
 </head>
@@ -15,95 +16,98 @@
 		<header>
 			<nav>
 				<h1 class="main-logo">Bookmark Project</h1>
-				<button class="add-bookmark">+</button>
-				<form>
-					<input type="text" placeholder="Search..." class="search-bar">
-				</form>
+				<div>
+					<button class="add-bookmark">+</button>
+					<form>
+						<input type="text" placeholder="Search..." class="search-bar">
+					</form>
+				</div>
 			</nav>
 		</header>
 
-		<nav class="sidebar-nav">
-			<h2 class="folder-header">Folders</h2>
-			<button class="add-folder">+</button>
-			<ul class="folder-list">
-				<!-- React component goes in here -->
-				<li><a href=#>Javascript</a></li>
-				<li><a href=#>Design</a></li>
-				<li><a href=#>Cat Videos</a></li>
-			</ul>
+		<div id="body">
+			<nav class="sidebar-nav">
+				<h2 class="folder-header">Folders</h2>
+				<button class="add-folder">+</button>
+				<ul class="folder-list">
+					<!-- React component goes in here -->
+					<li><a href=#>Javascript</a></li>
+					<li><a href=#>Design</a></li>
+					<li><a href=#>Cat Videos</a></li>
+				</ul>
 
-			<h2 class="tag-header">Tags</h2>
-			<ul class="tag-list">
-				<!-- React component goes in here -->
-				<li><a href=#>Not read yet</a></li>
-				<li><a href=#>Read</a></li>
-				<li><a href=#>Need for Project</a></li>
-			</ul>
-		</nav>
+				<h2 class="tag-header">Tags</h2>
+				<ul class="tag-list">
+					<!-- React component goes in here -->
+					<li><a href=#>Not read yet</a></li>
+					<li><a href=#>Read</a></li>
+					<li><a href=#>Need for Project</a></li>
+				</ul>
+			</nav>
 
-		<section class="tile-section">
-			<ul>
-				<li class="bookmark-tile">
-					<a href=#>
-						<h3>Bookmark Title</h3>
-						<img src="./IC688499.png" alt="placeholder-image">
-					</a>
-				</li>
+			<section class="tile-section">
+				<ul>
+					<li class="bookmark-tile">
+						<a href=#>
+							<h3>Bookmark Title</h3>
+							<img src="./IC688499.png" alt="placeholder-image">
+						</a>
+					</li>
 
-				<li class="bookmark-tile">
-					<a href=#>
-						<h3>Bookmark Title</h3>
-						<img src="./IC688499.png" alt="placeholder-image">
-					</a>
-				</li>
+					<li class="bookmark-tile">
+						<a href=#>
+							<h3>Bookmark Title</h3>
+							<img src="./IC688499.png" alt="placeholder-image">
+						</a>
+					</li>
 
-				<li class="bookmark-tile">
-					<a href=#>
-						<h3>Bookmark Title</h3>
-						<img src="./IC688499.png" alt="placeholder-image">
-					</a>
-				</li>
-			</ul>
-		</section>
+					<li class="bookmark-tile">
+						<a href=#>
+							<h3>Bookmark Title</h3>
+							<img src="./IC688499.png" alt="placeholder-image">
+						</a>
+					</li>
+				</ul>
+			</section>
 
-		<!-- temporarily hidden for prototype -->
-		<section class="bookmark-section hidden">
-			<h1>Bookmark Title</h1>
-			<h2>https://www.example.com</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam dignissimos praesentium vel atque ducimus obcaecati quia, quis libero repellat quaerat itaque numquam est provident. Officia necessitatibus quam est perferendis nam.</p>
-			<img src="https://i-msdn.sec.s-msft.com/dynimg/IC688499.png" alt="placeholder-image">
-			<h4>Tags:</h4>
-			<ul>
-				<!-- React component goes in here -->
-				<li>Not read yet</li>
-				<li>Need for project</li>
-			</ul>
-			<button class="close-window">X</button>
-			<button class="edit-bookmark">Pencil Icon</button>
-			<button class="delete-bookmark">Trash Icon</button>
-		</section>
-
-		<!-- temporarily hidden for prototype -->
-		<section class="add-bookmark-section hidden">
-			<form>
-				<h1>Enter a New Bookmark</h1>
+			<!-- temporarily hidden for prototype -->
+			<section class="bookmark-section hidden">
+				<h1>Bookmark Title</h1>
+				<h2>https://www.example.com</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam dignissimos praesentium vel atque ducimus obcaecati quia, quis libero repellat quaerat itaque numquam est provident. Officia necessitatibus quam est perferendis nam.</p>
+				<img src="https://i-msdn.sec.s-msft.com/dynimg/IC688499.png" alt="placeholder-image">
+				<h4>Tags:</h4>
+				<ul>
+					<!-- React component goes in here -->
+					<li>Not read yet</li>
+					<li>Need for project</li>
+				</ul>
 				<button class="close-window">X</button>
-				<h3>Title</h3>
-				<input type="text" required />
-				<h3>URL</h3>
-				<input type="text" required />
-				<h3>Description</h3>
-				<input type="text" />
-				<h3>Screenshot URL</h3>
-				<input type="text" />
-				<h3>Folder</h3>
-				<input type="text" required placeholder="Should be a drop down" />
-				<h3>Tags</h3>
-				<input type="text" />
-				<button type="submit">Save</button>
-			</form>
-		</section>
+				<button class="edit-bookmark">Pencil Icon</button>
+				<button class="delete-bookmark">Trash Icon</button>
+			</section>
 
+			<!-- temporarily hidden for prototype -->
+			<section class="add-bookmark-section hidden">
+				<form>
+					<h1>Enter a New Bookmark</h1>
+					<button class="close-window">X</button>
+					<h3>Title</h3>
+					<input type="text" required />
+					<h3>URL</h3>
+					<input type="text" required />
+					<h3>Description</h3>
+					<input type="text" />
+					<h3>Screenshot URL</h3>
+					<input type="text" />
+					<h3>Folder</h3>
+					<input type="text" required placeholder="Should be a drop down" />
+					<h3>Tags</h3>
+					<input type="text" />
+					<button type="submit">Save</button>
+				</form>
+			</section>
+		</div>
 	</div>
 </body>
 
