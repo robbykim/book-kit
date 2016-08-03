@@ -1,6 +1,6 @@
 var React = require('react');
 
-var OpenBookmark = React.createClass({
+var BookmarkView = React.createClass({
   render: function () {
     return (
       <section className="bookmark-section">
@@ -21,4 +21,4 @@ var OpenBookmark = React.createClass({
   }
 });
 
-module.exports = OpenBookmark;
+module.exports = BookmarkView;
