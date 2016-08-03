@@ -1,8 +1,13 @@
-var React = require('react');
-var Nav = require('./navbar');
-var Sidebar = require('./sidebar');
+const React = require('react');
+const Nav = require('./navbar');
+const Sidebar = require('./sidebar');
+const actions = require('./actions');
+const connect = require('react-redux').connect;
 
-var PageContainer = React.createClass({
+const PageContainer = React.createClass({
+  componentWillMount: function () {
+    this.props.dispatch(actions.getBookmarks());
+  },
   render: function() {
     return (
       <div>
@@ -19,4 +24,6 @@ var PageContainer = React.createClass({
   }
 });
 
-module.exports = PageContainer;
+const Container = connect()(PageContainer);
+
+module.exports = Container;

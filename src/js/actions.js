@@ -32,7 +32,7 @@ var addBookmark = function(  ) {
         tags: ["Redux", "Thinkful"]
       };
       storage.bookmarks.push(newBookmark);
-      return dispatch( addBookmarkSuccess( newBookmark ) );  
+      return dispatch( addBookmarkSuccess( newBookmark ) );
   };
 };
 
@@ -55,34 +55,34 @@ var addFolder = function(  ) {
   return function( dispatch ) {
       var newFolder = "Project Ideas";
       storage.folders.push(newFolder);
-      return dispatch( addFolderSuccess( newBookmark ) );  
+      return dispatch( addFolderSuccess( newBookmark ) );
   };
 };
 
 // Get requests
 var getBookmarksSuccess = function( bookmarks ) {
   return {
-    type: actionTypes.ADD_FOLDER_SUCCESS,
+    type: actionTypes.GET_BOOKMARKS_SUCCESS,
     bookmarks: bookmarks
   };
 };
 
 var getBookmarksError = function( error ) {
   return {
-    type: actionTypes.ADD_BOOKMARK_ERROR,
+    type: actionTypes.GET_BOOKMARKS_ERROR,
     error: error
   };
 };
 
 var getBookmarks = function( ) {
   return function( dispatch ) {
-      return dispatch( getBookmarksSuccess( storage.bookmarks ) );  
+      return dispatch( getBookmarksSuccess( storage.bookmarks ) );
   };
 };
 
 var getFoldersSuccess = function( folders ) {
   return {
-    type: actionTypes.ADD_FOLDER_SUCCESS,
+    type: actionTypes.GET_FOLDER_SUCCESS,
     folders: folders
   };
 };
@@ -96,7 +96,7 @@ var getFoldersError = function( error ) {
 
 var getFolders = function( ) {
   return function( dispatch ) {
-      return dispatch( getFoldersSuccess( storage.folders ) );  
+      return dispatch( getFoldersSuccess( storage.folders ) );
   };
 };
 
@@ -139,7 +139,7 @@ var getBookmarksByFolder = function( folder ) {
       bookmarks = storage.bookmarks.filter(function(value) {
         return value.FolderName === folder;
       });
-      return dispatch( getBookmarksByFolderSuccess( bookmarks ) );  
+      return dispatch( getBookmarksByFolderSuccess( bookmarks ) );
   };
 };
 
@@ -162,7 +162,7 @@ var getBookmarksByTag = function( tag ) {
       bookmarks = storage.bookmarks.filter(function(value) {
         return value.tag.indexOf(tag) > 1;
       });
-      return dispatch( getBookmarksByTagSuccess( bookmarks ) );  
+      return dispatch( getBookmarksByTagSuccess( bookmarks ) );
   };
 };
 
@@ -183,7 +183,7 @@ var editBookmarkError = function( error ) {
 
 var editBookmark = function( editedBookmark ) {
   return function( dispatch ) {
-      return dispatch( editBookmark(  ) );  
+      return dispatch( editBookmark(  ) );
   };
 };
 
@@ -203,7 +203,7 @@ var deleteBookmarkError = function ( error ) {
 
 var deleteBookmark = function( bookmark ) {
   return function( dispatch ) {
-      return dispatch( deleteBookmark(  ) );  
+      return dispatch( deleteBookmark(  ) );
   };
 };
 

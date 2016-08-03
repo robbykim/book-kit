@@ -8,8 +8,4 @@ var reducers = require('./reducers');
 
 var store = createStore(reducers.rootReducer, applyMiddleware( thunk ));
 
-console.log(store.getState());
-console.log(store.dispatch(actions.addBookmark()));
-console.log(store.getState().bookmarks);
-
 module.exports = store;
