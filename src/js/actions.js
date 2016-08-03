@@ -96,8 +96,28 @@ var getFoldersError = function( error ) {
 
 var getFolders = function( ) {
   return function( dispatch ) {
-      return dispatch( getFoldersSuccess( storage.Folders ) );  
+      return dispatch( getFoldersSuccess( storage.folders ) );  
   };
+};
+
+var getTagsSuccess = function( tags ) {
+  return {
+    type: actionTypes.GET_TAGS_SUCCESS,
+    tags: tags
+  };
+};
+
+var getTagsError = function( error ) {
+  return {
+    type: actionTypes.GET_TAGS_SUCCESS,
+    error: error
+  };
+};
+
+var getTags = function( ) {
+  return function( dispatch ) {
+    return dispatch( getTagsSuccess( storage.tags ) );
+  }
 };
 
 var getBookmarksByFolderSuccess = function( bookmarks ) {
@@ -167,10 +187,10 @@ var editBookmark = function( editedBookmark ) {
   };
 };
 
-var deleteBookmarkSuccess = function( message ) {
+var deleteBookmarkSuccess = function( deletedBookmark ) {
   return {
     type: actionTypes.DELETE_BOOKMARK_SUCCESS,
-    message: message
+    bookmark: deleteBookmark
   };
 };
 
@@ -186,24 +206,6 @@ var deleteBookmark = function( bookmark ) {
       return dispatch( deleteBookmark(  ) );  
   };
 };
-
-// var loadBookmarkForm = function(  ) {
-//   return {
-//     type: actionTypes.LOAD_BOOKMARK_FORM
-//   };
-// };
-
-// var viewBookmark = function(  ) {
-//   return {
-//     type: actionTypes.VIEW_BOOKMARK
-//   };
-// };
-
-// var closeBookmark = function(  ) {
-//   return {
-//     type: actionTypes.CLOSE_BOOKMARK
-//   };
-// };
 
 var confirmDeleteBookmark = function(  ) {
   return {
