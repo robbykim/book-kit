@@ -1,18 +1,18 @@
-var React = require('react');
-var Tile = require('./tile');
-var connect = require('react-redux').connect;
-var actions = require('./actions');
-var BookmarkView = require('./bookmark-view');
+const React = require('react');
+const Tile = require('./tile');
+const connect = require('react-redux').connect;
+const actions = require('./actions');
+const BookmarkView = require('./bookmark-view');
 
 // COMPONENT: Displays the collection of tiles on the main page
-var BookmarkTiles = React.createClass({
+const BookmarkTiles = React.createClass({
   render: function () {
-    var tileArr = [];
+    let tileArr = [];
     // Makes an array of Tile components to be displayed
-    for (var i = 0; i < this.props.bookmarks.length; i++) {
-      var bookmark = this.props.bookmarks[i];
-      tileArr.push(<Tile key={bookmark.id} title={bookmark.title} index={i} id={bookmark.id}
-                    url={bookmark.url} screenshot={bookmark.screenshot}/>);
+    for (let i = 0; i < this.props.bookmarks.length; i++) {
+      const bookmark = this.props.bookmarks[i];
+      tileArr.push(<Tile key={bookmark.bookmarkid} title={bookmark.title}
+                    id={bookmark.bookmarkid} screenshot={bookmark.screenshot}/>);
     }
     return (
       <section className="tile-section">
@@ -30,7 +30,7 @@ const mapStateToProps = function(state, props) {
   };
 };
 
-var Container = connect(mapStateToProps)(BookmarkTiles);
+const Container = connect(mapStateToProps)(BookmarkTiles);
 
 module.exports = Container;
 

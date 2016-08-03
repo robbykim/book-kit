@@ -5,7 +5,7 @@ const actions = require('./actions');
 const connect = require('react-redux').connect;
 
 const PageContainer = React.createClass({
-  componentWillMount: function () {
+  componentDidMount: function () {
     this.props.dispatch(actions.getBookmarks());
   },
   render: function() {
