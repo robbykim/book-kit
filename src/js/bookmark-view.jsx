@@ -1,17 +1,19 @@
-var React = require('react');
-var connect = require('react-redux').connect;
+const React = require('react');
+const connect = require('react-redux').connect;
+const router = require('react-router');
+const Link = router.Link;
 
 // COMPONENT: Displays detailed information for a selected bookmark
-var BookmarkView = React.createClass({
+const BookmarkView = React.createClass({
   render: function () {
     if (this.props.bookmarks.length === 0) {
       return null;
     }
     // Will get the id of the item from the url
-    var id = this.props.params.bookmarkId;
+    const id = this.props.params.bookmarkId;
 
     // filters through the bookmarks by the selected id
-    var bookmark = this.props.bookmarks.filter(function(bookmark) {
+    let bookmark = this.props.bookmarks.filter(function(bookmark) {
       return id === bookmark.bookmarkid.toString();
     });
 
@@ -23,7 +25,9 @@ var BookmarkView = React.createClass({
         <img src={bookmark[0].screenshot} alt="placeholder-image" />
         <h4>Folder:</h4>
         <p>{bookmark[0].folderName}</p>
-        <button className="close-window">X</button>
+        <Link to={'/'}>
+          <button className="close-window">X</button>
+        </Link>
         <button className="edit-bookmark">Pencil Icon</button>
         <button className="delete-bookmark">Trash Icon</button>
       </section>
@@ -38,6 +42,6 @@ const mapStateToProps = function (state, props) {
   };
 };
 
-var Container = connect(mapStateToProps)(BookmarkView);
+const Container = connect(mapStateToProps)(BookmarkView);
 
 module.exports = Container;
