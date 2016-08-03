@@ -23,3 +23,4 @@ var tags = ["Project-Managment", "Thinkful", "Redux"];
 
 exports.bookmarks = bookmarks;
 exports.folders = folders;
+exports.tags = tags;

@@ -8,7 +8,7 @@ var fetch = require( 'isomorphic-fetch' );
 // Post Requests
 var addBookmarkSuccess = function( newBookmark ) {
   return {
-    type: actionTypes.ADD_FOLDER_SUCCESS,
+    type: actionTypes.ADD_BOOKMARK_SUCCESS,
     bookmark: newBookmark
   };
 };
@@ -217,6 +217,7 @@ exports.addBookmark = addBookmark;
 exports.addFolder = addFolder;
 exports.getBookmarks = getBookmarks;
 exports.getFolders = getFolders;
+exports.getTags = getTags;
 exports.getBookmarksByFolder = getBookmarksByFolder;
 exports.getBookmarksByTag = getBookmarksByTag;
 exports.editBookmark = editBookmark;
