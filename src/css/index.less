@@ -42,10 +42,22 @@
     }
     .bookmark-tile {
       display: inline-block;
-      a {
-        img {
-          height: 10rem;
-        }
+      h3 {
+        padding: 3rem;
+        position: relative;
+        z-index: 1;
+        margin: 0.5rem;
+      }
+      .bg {
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        opacity: .4;
+        background-size: cover;
+        opacity: '0.3';
       }
     }
   }

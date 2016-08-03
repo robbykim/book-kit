@@ -33,7 +33,3 @@ const mapStateToProps = function(state, props) {
 const Container = connect(mapStateToProps)(BookmarkTiles);
 
 module.exports = Container;
-
-// TODO: connect state to folders and bookmark tiles
-// TODO: write the fetch requests
-// TODO: test front end to make sure it will work and be ready for API's
