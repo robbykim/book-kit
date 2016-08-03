@@ -15,8 +15,8 @@ const routes = (
   <Router history={hashHistory}>
     <Route path="/" component={PageContainer}>
       <IndexRoute component={BookmarkTiles} />
-      <Route path="/add" component={BookmarkForm} />
-      <Route path=":bookmarkId" component={BookmarkView} />
+      <Route path="/bookmarks/add" component={BookmarkForm} />
+      <Route path="/bookmarks/:bookmarkId" component={BookmarkView} />
     </Route>
   </Router>
 );
