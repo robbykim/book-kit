@@ -6,12 +6,22 @@ const connect = require('react-redux').connect;
 const BookmarkTiles = React.createClass({
   render: function () {
     let tileArr = [];
-    // Makes an array of Tile components to be displayed
-    this.props.bookmarks.forEach(function(bookmark) {
-      tileArr.push(<Tile key={bookmark.bookmarkid} title={bookmark.title}
-                    id={bookmark.bookmarkid} screenshot={bookmark.screenshot}/>);
-    });
-    
+    if (this.props.params.folderName) {
+      let folder = this.props.params.folderName;
+      let tempArr = this.props.bookmarks.filter(function(bookmark) {
+        return folder === bookmark.foldername;
+      });
+      tempArr.forEach(function(bookmark) {
+        tileArr.push(<Tile key={bookmark.bookmarkid} title={bookmark.title}
+                      id={bookmark.bookmarkid} screenshot={bookmark.screenshot}/>);
+      });
+    } else {
+      // Makes an array of Tile components to be displayed
+      this.props.bookmarks.forEach(function(bookmark) {
+        tileArr.push(<Tile key={bookmark.bookmarkid} title={bookmark.title}
+                      id={bookmark.bookmarkid} screenshot={bookmark.screenshot}/>);
+      });
+    }
     return (
       <section className="tile-section">
         <ul>

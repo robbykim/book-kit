@@ -17,6 +17,7 @@ const routes = (
       <IndexRoute component={BookmarkTiles} />
       <Route path="/bookmarks/add" component={BookmarkForm} />
       <Route path="/bookmarks/:bookmarkId" component={BookmarkView} />
+      <Route path="/folders/:folderName" component={BookmarkTiles} />
     </Route>
   </Router>
 );

@@ -24,7 +24,7 @@ const BookmarkView = React.createClass({
         <p>{bookmark[0].description}</p>
         <img src={bookmark[0].screenshot} alt="placeholder-image" />
         <h4>Folder:</h4>
-        <p>{bookmark[0].folderName}</p>
+        <p>{bookmark[0].foldername}</p>
         <Link to={'/'}>
           <button className="close-window">X</button>
         </Link>
