@@ -8,8 +8,7 @@ const Sidebar = React.createClass({
     this.props.dispatch(actions.showFolderInput());
   },
   postFolder: function () {
-    console.log(this.refs.newFolder.value);
-    // this.props.dispatch(actions.addFolder(event.target.value));
+    this.props.dispatch(actions.addFolder(this.refs.newFolder.value));
   },
   render: function() {
     let hide = this.props.showFolder ? '' : 'hidden';

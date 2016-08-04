@@ -64,11 +64,37 @@ var addFolderError = function(error) {
   };
 };
 
-var addFolder = function() {
+var addFolder = function(newFolder) {
   return function(dispatch) {
-    var newFolder = 'Project Ideas';
-    storage.folders.push(newFolder);
-    return dispatch(addFolderSuccess(newBookmark));
+    var init = {
+      method: 'POST',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        foldername: newFolder
+      })
+    };
+    var url = 'https://shrouded-journey-65738.herokuapp.com/folder';
+    fetch(url, init).then(function(res) {
+      console.log(res);
+      if (res.status < 200 || res.status >= 300) {
+        var error = new Error(res.statusText);
+        error.response = res;
+        throw error;
+      }
+      return res.json();
+    }).then(function(folder) {
+      console.log(folder);
+      return dispatch (
+        addFolderSuccess(folder)
+      );
+    }).catch(function(error) {
+      return dispatch (
+        addFolderError(error)
+      );
+    });
   };
 };
 
