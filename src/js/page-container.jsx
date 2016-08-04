@@ -1,12 +1,13 @@
 const React = require('react');
-const Nav = require('./navbar');
-const Sidebar = require('./sidebar');
+const Nav = require('./nav-header');
+const Sidebar = require('./nav-sidebar');
 const actions = require('./actions');
 const connect = require('react-redux').connect;
 
 const PageContainer = React.createClass({
   componentDidMount: function () {
     this.props.dispatch(actions.getBookmarks());
+    this.props.dispatch(actions.getFolders());
   },
   render: function() {
     return (

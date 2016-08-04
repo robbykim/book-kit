@@ -98,21 +98,37 @@ var getBookmarks = function() {
 
 var getFoldersSuccess = function(folders) {
   return {
-    type: actionTypes.GET_FOLDER_SUCCESS,
+    type: actionTypes.GET_FOLDERS_SUCCESS,
     folders: folders
   };
 };
 
 var getFoldersError = function(error) {
   return {
-    type: actionTypes.GET_FOLDER_ERROR,
+    type: actionTypes.GET_FOLDERS_ERROR,
     error: error
   };
 };
 
 var getFolders = function() {
   return function(dispatch) {
-    return dispatch(getFoldersSuccess(storage.folders));
+    var url = 'https://shrouded-journey-65738.herokuapp.com/folders';
+    return fetch(url).then(function(res) {
+      if (res.status < 200 || res.status >= 300) {
+        var error = new Error(res.statusText);
+        error.response = res;
+        throw error;
+      }
+      return res.json();
+    }).then(function(folders) {
+      return dispatch (
+        getFoldersSuccess(folders)
+      );
+    }).catch(function(error) {
+      return dispatch(
+        getFoldersError(error)
+      );
+    });
   };
 };
 
