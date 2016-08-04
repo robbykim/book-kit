@@ -15,6 +15,8 @@ const BookmarkTiles = React.createClass({
         tileArr.push(<Tile key={bookmark.bookmarkid} title={bookmark.title}
                       id={bookmark.bookmarkid} screenshot={bookmark.screenshot}/>);
       });
+    } else if (this.props.params.input) {
+
     } else {
       // Makes an array of Tile components to be displayed
       this.props.bookmarks.forEach(function(bookmark) {

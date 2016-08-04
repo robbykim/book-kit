@@ -1,6 +1,7 @@
 const React = require('react');
 const router = require('react-router');
 const Link = router.Link;
+const Form = require('react-router-form');
 
 const Navbar = React.createClass({
   render: function() {
@@ -14,9 +15,9 @@ const Navbar = React.createClass({
             <Link to={'/bookmarks/add'}>
               <button className="add-bookmark">+</button>
             </Link>
-            <form>
-              <input type="text" placeholder="Search..." className="search-bar"/>
-            </form>
+            <Form to={'/search/' + this.props.input}>
+              <input type="text" onChange={this.props.onChange} placeholder="Search..." className="search-bar"/>
+            </Form>
           </div>
         </nav>
       </header>
