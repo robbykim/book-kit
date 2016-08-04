@@ -1,9 +1,32 @@
 var actionTypes = require('./constants');
 var combineReducers = require('redux').combineReducers;
 
+var searchReducer = function(state, action) {
+  state = state || '';
+
+  switch (action.type) {
+    case actionTypes.SEARCH_TEXT_CHANGE:
+      return action.text;
+
+    default:
+      return state;
+  }
+};
+
+var folderAddReducer = function (state, action) {
+  state = state || false;
+
+  switch (action.type) {
+    case actionTypes.SHOW_FOLDER_INPUT:
+      return !state;
+
+    default:
+      return state;
+  }
+};
+
 var bookmarkReducer = function(state, action) {
   state = state || [];
-  var newbookmarkArray;
   var index;
 
   switch (action.type) {
@@ -82,7 +105,6 @@ var tagReducer = function(state, action) {
       return action.tags;
 
     case actionTypes.GET_TAGS_ERROR:
-      console.log(action.error);
       break;
 
     default:
@@ -93,8 +115,9 @@ var tagReducer = function(state, action) {
 var rootReducer = combineReducers({
   bookmarks: bookmarkReducer,
   folders: folderReducer,
-  tags: tagReducer
+  tags: tagReducer,
+  search: searchReducer,
+  showFolder: folderAddReducer
 });
 
 exports.rootReducer = rootReducer;
-

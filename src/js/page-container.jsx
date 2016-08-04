@@ -1,5 +1,5 @@
 const React = require('react');
-const Nav = require('./nav-header-container');
+const Nav = require('./nav-header');
 const Sidebar = require('./nav-sidebar');
 const actions = require('./actions');
 const connect = require('react-redux').connect;

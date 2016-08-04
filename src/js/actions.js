@@ -5,6 +5,19 @@ var storage = require('./storage');
 
 var fetch = require('isomorphic-fetch');
 
+var searchTextChange = function(text) {
+  return {
+    type: actionTypes.SEARCH_TEXT_CHANGE,
+    text: text
+  };
+};
+
+var showFolderInput = function () {
+  return {
+    type: actionTypes.SHOW_FOLDER_INPUT
+  };
+};
+
 // Post Requests
 var addBookmarkSuccess = function(newBookmark) {
   return {
@@ -245,6 +258,8 @@ var confirmDeleteBookmark = function() {
   };
 };
 
+exports.showFolderInput = showFolderInput;
+exports.searchTextChange = searchTextChange;
 exports.addBookmark = addBookmark;
 exports.addFolder = addFolder;
 exports.getBookmarks = getBookmarks;

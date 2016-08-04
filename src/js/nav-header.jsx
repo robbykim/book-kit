@@ -1,9 +1,14 @@
 const React = require('react');
 const router = require('react-router');
 const Link = router.Link;
-const Form = require('react-router-form');
+const connect = require('react-redux').connect;
+const actions = require('./actions');
 
 const Navbar = React.createClass({
+  onAddInput: function (event) {
+    let text = event.target.value;
+    this.props.dispatch(actions.searchTextChange(text));
+  },
   render: function() {
     return (
       <header>
@@ -15,9 +20,7 @@ const Navbar = React.createClass({
             <Link to={'/bookmarks/add'}>
               <button className="add-bookmark">+</button>
             </Link>
-            <Form to={'/search/' + this.props.input}>
-              <input type="text" onChange={this.props.onChange} placeholder="Search..." className="search-bar"/>
-            </Form>
+            <input type="text" onChange={this.onAddInput} placeholder="Search..." className="search-bar"/>
           </div>
         </nav>
       </header>
@@ -25,4 +28,6 @@ const Navbar = React.createClass({
   }
 });
 
-module.exports = Navbar;
+const Container = connect()(Navbar);
+
+module.exports = Container;
