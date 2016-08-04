@@ -75,13 +75,17 @@ var bookmarkReducer = function(state, action) {
 };
 
 var folderReducer = function(state, action) {
+  console.log('at top of folderReducer: ', action);
   // This part of the state is an array
   state = state || [];
 
   switch (action.type) {
-    case actionTypes.ADD_FOLDERS_SUCCESS:
-      state.push(state.folder);
-      return state;
+    case actionTypes.ADD_FOLDER_SUCCESS:
+      console.log('state: ', state);
+      var newState = state.slice();
+      newState.push(action.folder.foldername);
+      console.log('newState: ', newState);
+      return newState;
 
     case actionTypes.GET_FOLDERS_SUCCESS:
       return action.folders;

@@ -51,6 +51,7 @@ var addBookmark = function() {
 
 
 var addFolderSuccess = function(newFolderName) {
+  console.log('in addFolderSuccess');
   return {
     type: actionTypes.ADD_FOLDER_SUCCESS,
     folder: newFolderName
@@ -87,13 +88,9 @@ var addFolder = function(newFolder) {
       return res.json();
     }).then(function(folder) {
       console.log(folder);
-      return dispatch (
-        addFolderSuccess(folder)
-      );
+      return dispatch (addFolderSuccess(folder));
     }).catch(function(error) {
-      return dispatch (
-        addFolderError(error)
-      );
+      return dispatch ( addFolderError(error) );
     });
   };
 };
