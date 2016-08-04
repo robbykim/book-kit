@@ -9,7 +9,7 @@ const Navbar = React.createClass({
         <nav>
           <h1 className="main-logo">Bookmark Project</h1>
           <div>
-            <Link to={'/add'}>
+            <Link to={'/bookmarks/add'}>
               <button className="add-bookmark">+</button>
             </Link>
             <form>

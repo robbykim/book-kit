@@ -1,46 +1,39 @@
-var React = require('react');
-var Tile = require('./tile');
+const React = require('react');
+const Tile = require('./tile');
+const connect = require('react-redux').connect;
+const actions = require('./actions');
+const BookmarkView = require('./bookmark-view');
 
-var BookmarkTiles = React.createClass({
-  onFocus: function () {
-    // TODO: add dispatch function here
-    // this.props.dispatch
-    // this will be a route
-  },
+// COMPONENT: Displays the collection of tiles on the main page
+const BookmarkTiles = React.createClass({
   render: function () {
-    var tileArr = [];
-    // list of bookmarks passed into props
-    // this.props.bookmarks.forEach(function (bookmark, index) {
-    //   tileArr.push(<Tile key={index} onFocus={this.onFocus} title={bookmark.title}
-    //     url={bookmark.url} screenshot={bookmark.screenshot}/>);
-    // });
+    let tileArr = [];
+    // Makes an array of Tile components to be displayed
+    for (let i = 0; i < this.props.bookmarks.length; i++) {
+      const bookmark = this.props.bookmarks[i];
+      tileArr.push(<Tile key={bookmark.bookmarkid} title={bookmark.title}
+                    id={bookmark.bookmarkid} screenshot={bookmark.screenshot}/>);
+    }
     return (
       <section className="tile-section">
         <ul>
-          {/* {tileArr} */}
-
-          <li className="bookmark-tile">
-            <a href='#'>
-              <h3>Bookmark Title</h3>
-              <img src="./IC688499.png" alt="placeholder-image"/>
-            </a>
-          </li>
-          <li className="bookmark-tile">
-            <a href='#'>
-              <h3>Bookmark Title</h3>
-              <img src="./IC688499.png" alt="placeholder-image"/>
-            </a>
-          </li>
-          <li className="bookmark-tile">
-            <a href='#'>
-              <h3>Bookmark Title</h3>
-              <img src="./IC688499.png" alt="placeholder-image"/>
-            </a>
-          </li>
+          {tileArr}
         </ul>
       </section>
     );
   }
 });
 
-module.exports = BookmarkTiles;
+const mapStateToProps = function(state, props) {
+  return {
+    bookmarks: state.bookmarks
+  };
+};
+
+const Container = connect(mapStateToProps)(BookmarkTiles);
+
+module.exports = Container;
+
+// TODO: connect state to folders and bookmark tiles
+// TODO: write the fetch requests
+// TODO: test front end to make sure it will work and be ready for API's
