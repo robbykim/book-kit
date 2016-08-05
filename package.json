@@ -24,14 +24,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/robbykim/bookmarks-fullstack.git"
+    "url": "git+https://github.com/robbykim/book-kit.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/robbykim/bookmarks-fullstack/issues"
+    "url": "https://github.com/robbykim/book-kit/issues"
   },
-  "homepage": "https://github.com/robbykim/bookmarks-fullstack#readme",
+  "homepage": "https://github.com/robbykim/book-kit#readme",
   "devDependencies": {
     "babel-core": "^6.11.4",
     "babel-loader": "^6.2.4",
