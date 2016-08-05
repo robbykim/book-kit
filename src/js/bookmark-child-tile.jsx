@@ -11,10 +11,12 @@ const Tile = React.createClass({
     return (
       // Will route to /bookmarks/:bookmarkId
       <Link to={'/bookmarks/' + this.props.id}>
-        <li className="bookmark-tile">
+        <li className="bookmark-tile col-md-3">
           <h3>
             <div className="bg" style={style}></div>
-            {this.props.title}
+            <span>
+              {this.props.title}
+            </span>
           </h3>
         </li>
       </Link>

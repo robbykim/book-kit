@@ -6,7 +6,7 @@ const connect = require('react-redux').connect;
 const BookmarkTiles = React.createClass({
   render: function () {
     let tileArr = [];
-    
+
     if (this.props.params.folderName) {
       let folder = this.props.params.folderName;
       let tempArr = this.props.bookmarks.filter(function(bookmark) {
@@ -54,7 +54,7 @@ const BookmarkTiles = React.createClass({
     }
     return (
       <section className="tile-section">
-        <ul>
+        <ul className="row">
           {tileArr}
         </ul>
       </section>
