@@ -1,6 +1,5 @@
 const React = require('react');
 const Nav = require('./nav-header');
-const Sidebar = require('./nav-sidebar');
 const actions = require('./actions');
 const connect = require('react-redux').connect;
 
@@ -13,11 +12,8 @@ const PageContainer = React.createClass({
     return (
       <div>
         <Nav/>
-        <section className="main-section">
-          <Sidebar/>
-          <div className="content">
-            {this.props.children}
-          </div>
+        <section className="main-section container">
+          {this.props.children}
         </section>
       </div>
     );

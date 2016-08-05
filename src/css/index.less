@@ -1,64 +1,23 @@
-* {
-  font-family: Helvetica, sans-serif;
-}
-// look into flexbox
-.hidden {
-  display: none;
-}
-#app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  header {
-    border-bottom: 2px solid grey;
-    margin-bottom: 1rem;
-    nav {
-      display: flex;
-      width: 65%;
-      margin: 0 auto;
-      align-content: center;
-      padding: 1rem 0;
-      justify-content: space-between;
-      form {
-        display: inline-block;
-      }
-    }
-  }
-  .main-section {
-    width: 65%;
-    margin: 0 auto;
+.bookmark-tile {
+  h3 {
+    height: 15rem;
+    position: relative;
+    z-index: 1;
+    margin: 0.5rem;
     display: flex;
-    justify-content: space-between;
-    .sidebar-nav {
-      // flex: 0 0 12em;
-      order: -1;
-      flex-basis: 12em;
-      h2 {
-        display: inline-block;
-      }
-      ul {
-        margin-bottom: 1rem;
-      }
-    }
-    .bookmark-tile {
-      display: inline-block;
-      h3 {
-        padding: 3rem;
-        position: relative;
-        z-index: 1;
-        margin: 0.5rem;
-      }
-      .bg {
-        position: absolute;
-        z-index: -1;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        opacity: .4;
-        background-size: cover;
-        opacity: '0.3';
-      }
-    }
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+  .bg {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: .4;
+    background-size: cover;
+    border-radius: 0.8rem;
   }
 }

@@ -19,17 +19,19 @@ const BookmarkView = React.createClass({
 
     return (
       <section className="bookmark-section">
-        <h1>{bookmark[0].title}</h1>
-        <h2><a href={bookmark[0].url}>{bookmark[0].url}</a></h2>
-        <p>{bookmark[0].description}</p>
-        <img src={bookmark[0].screenshot} alt="placeholder-image" />
-        <h4>Folder:</h4>
-        <p>{bookmark[0].foldername}</p>
-        <Link to={'/'}>
-          <button className="close-window">X</button>
-        </Link>
-        <button className="edit-bookmark">Pencil Icon</button>
-        <button className="delete-bookmark">Trash Icon</button>
+        <div className="col-md-6">
+          <h2>{bookmark[0].title}</h2>
+          <h4><a href={bookmark[0].url}>{bookmark[0].url}</a></h4>
+          <p>{bookmark[0].description}</p>
+          <h4>Folder:</h4>
+          <p>{bookmark[0].foldername}</p>
+          <Link to={'/'}>
+            <button className="btn btn-default">Close</button>
+          </Link>
+        </div>
+        <div className="col-md-6">
+          <img src={bookmark[0].screenshot} alt="placeholder-image" className="img-rounded" width="400"/>
+        </div>
       </section>
     );
   }
