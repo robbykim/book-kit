@@ -28,7 +28,7 @@ const Navbar = React.createClass({
             <ul className="nav navbar-nav">
               <li>
                 <Link className="navbar-brand" to={'/'}>
-                  Book Kit
+                  <img src="logo.png" alt="Book Kit!"/>
                 </Link>
               </li>
               <li>
