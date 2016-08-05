@@ -4,6 +4,7 @@ const Link = router.Link;
 const connect = require('react-redux').connect;
 const actions = require('./actions');
 const Folder = require('./nav-child-folder');
+const BookmarkForm = require('./bookmark-form');
 
 const Navbar = React.createClass({
   onAddInput: function (event) {
@@ -17,7 +18,6 @@ const Navbar = React.createClass({
   render: function() {
     let folderArr = [];
     this.props.folders.forEach(function(folder, index) {
-      console.log('works');
       folderArr.push(<Folder key={index} folder={folder}/>);
     });
 
@@ -32,9 +32,13 @@ const Navbar = React.createClass({
                 </Link>
               </li>
               <li>
-                <Link to={'/bookmarks/add'}>
+                <a data-toggle="modal" data-target="#add-form">
                   <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                </Link>
+                </a>
+
+                <div className="modal fade" id="add-form">
+                  <BookmarkForm />
+                </div>
               </li>
             </ul>
             <form className="navbar-form navbar-right">

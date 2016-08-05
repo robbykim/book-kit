@@ -12,12 +12,6 @@ var searchTextChange = function(text) {
   };
 };
 
-var showFolderInput = function () {
-  return {
-    type: actionTypes.SHOW_FOLDER_INPUT
-  };
-};
-
 // Post Requests
 var addBookmarkSuccess = function(newBookmark) {
   return {
@@ -163,12 +157,10 @@ var getFolders = function() {
       }
       return res.json();
     }).then(function(folders) {
-      console.log('success');
       return dispatch (
         getFoldersSuccess(folders)
       );
     }).catch(function(error) {
-      console.log('fail');
       return dispatch(
         getFoldersError(error)
       );
@@ -289,7 +281,6 @@ var confirmDeleteBookmark = function() {
   };
 };
 
-exports.showFolderInput = showFolderInput;
 exports.searchTextChange = searchTextChange;
 exports.addBookmark = addBookmark;
 exports.addFolder = addFolder;
