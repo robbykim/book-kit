@@ -15,7 +15,6 @@ const PageContainer = React.createClass({
         <Nav/>
         <section className="main-section container">
           <div className="row">
-            <Sidebar/>
             <div className="content col-md-10">
               {this.props.children}
             </div>
