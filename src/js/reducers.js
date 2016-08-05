@@ -66,7 +66,6 @@ var bookmarkReducer = function(state, action) {
     case actionTypes.GET_BOOKMARKS_BY_TAG_ERROR:
     case actionTypes.EDIT_BOOKMARK_ERROR:
     case actionTypes.DELETE_BOOKMARK_ERROR:
-      console.log(action.error);
       break;
 
     default:
@@ -75,16 +74,13 @@ var bookmarkReducer = function(state, action) {
 };
 
 var folderReducer = function(state, action) {
-  console.log('at top of folderReducer: ', action);
   // This part of the state is an array
   state = state || [];
 
   switch (action.type) {
     case actionTypes.ADD_FOLDER_SUCCESS:
-      console.log('state: ', state);
       var newState = state.slice();
       newState.push(action.folder.foldername);
-      console.log('newState: ', newState);
       return newState;
 
     case actionTypes.GET_FOLDERS_SUCCESS:
@@ -92,7 +88,6 @@ var folderReducer = function(state, action) {
 
     case actionTypes.ADD_FOLDER_ERROR:
     case actionTypes.GET_FOLDERS_ERROR:
-      console.log(action.error);
       break;
 
     default:

@@ -19,9 +19,11 @@ const Sidebar = React.createClass({
     });
 
     return (
-      <nav className="sidebar-nav">
-        <h2 className="folder-header">Folders</h2>
-        <button className="add-folder" onClick={this.showFolder}>{plusMinus}</button>
+      <nav className="sidebar-nav col-md-2">
+        <div className="row">
+          <h2 className="folder-header">Folders</h2>
+          <button className="add-folder" onClick={this.showFolder}>{plusMinus}</button>
+        </div>
         <form className={hide} onSubmit={this.postFolder}>
           <input type="text" ref="newFolder"/>
         </form>

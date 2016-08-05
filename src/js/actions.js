@@ -33,25 +33,33 @@ var addBookmarkError = function(error) {
   };
 };
 
-var addBookmark = function() {
+var addBookmark = function(newBookmark) {
   return function(dispatch) {
-    var newBookmark = {
-      url: 'https://github.com/robbykim/bookmarks-fullstack',
-      title: 'Full stack Bookmark Repo',
-      description: 'The repo for the fullstack bookmark project.',
-      screenshot: 'https://guides.github.com/introduction/getting-your-project-on-github/repository.png',
-      user: 'Joe',
-      folderName: 'Work',
-      tags: ['Redux', 'Thinkful']
+    var init = {
+      method: 'POST',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newBookmark)
     };
-    storage.bookmarks.push(newBookmark);
-    return dispatch(addBookmarkSuccess(newBookmark));
+    var url = 'https://shrouded-journey-65738.herokuapp.com/bookmark';
+    fetch(url, init).then(function(res) {
+      if (res.status < 200 || res.status >= 300) {
+        var error = new Error(res.statusText);
+        error.reponse = res;
+        throw error;
+      }
+      return res.json();
+    }).then(function(bookmark) {
+      return dispatch(addBookmarkSuccess(bookmark));
+    }).catch(function(error) {
+      return dispatch(addBookmarkError(error));
+    });
   };
 };
 
-
 var addFolderSuccess = function(newFolderName) {
-  console.log('in addFolderSuccess');
   return {
     type: actionTypes.ADD_FOLDER_SUCCESS,
     folder: newFolderName
@@ -79,7 +87,6 @@ var addFolder = function(newFolder) {
     };
     var url = 'https://shrouded-journey-65738.herokuapp.com/folder';
     fetch(url, init).then(function(res) {
-      console.log(res);
       if (res.status < 200 || res.status >= 300) {
         var error = new Error(res.statusText);
         error.response = res;
@@ -87,10 +94,9 @@ var addFolder = function(newFolder) {
       }
       return res.json();
     }).then(function(folder) {
-      console.log(folder);
-      return dispatch (addFolderSuccess(folder));
+      return dispatch(addFolderSuccess(folder));
     }).catch(function(error) {
-      return dispatch ( addFolderError(error) );
+      return dispatch(addFolderError(error));
     });
   };
 };

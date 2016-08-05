@@ -13,10 +13,12 @@ const PageContainer = React.createClass({
     return (
       <div>
         <Nav/>
-        <section className="main-section">
-          <Sidebar/>
-          <div className="content">
-            {this.props.children}
+        <section className="main-section container">
+          <div className="row">
+            <Sidebar/>
+            <div className="content col-md-10">
+              {this.props.children}
+            </div>
           </div>
         </section>
       </div>

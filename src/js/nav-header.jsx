@@ -12,15 +12,17 @@ const Navbar = React.createClass({
   render: function() {
     return (
       <header>
-        <nav>
-          <Link to={'/'}>
-            <h1 className="main-logo">Bookmark Project</h1>
-          </Link>
-          <div>
-            <Link to={'/bookmarks/add'}>
-              <button className="add-bookmark">+</button>
+        <nav className="navbar navbar-default">
+          <div className="container">
+            <Link to={'/'}>
+              <a className="navbar-brand">Book Kit</a>
             </Link>
-            <input type="text" onChange={this.onAddInput} placeholder="Search..." className="search-bar"/>
+            <div className="nav navbar-right">
+              <Link to={'/bookmarks/add'}>
+                <button className="btn">+</button>
+              </Link>
+              <input type="text" onChange={this.onAddInput} placeholder="Search..." className="search-bar"/>
+            </div>
           </div>
         </nav>
       </header>
