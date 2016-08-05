@@ -21453,7 +21453,7 @@
 	var IndexRoute = router.IndexRoute;
 	
 	var PageContainer = __webpack_require__(239);
-	var BookmarkView = __webpack_require__(276);
+	var BookmarkView = __webpack_require__(277);
 	var BookmarkTiles = __webpack_require__(278);
 	
 	var routes = React.createElement(
@@ -27136,8 +27136,8 @@
 	var Link = router.Link;
 	var connect = __webpack_require__(241).connect;
 	var actions = __webpack_require__(269);
-	var Folder = __webpack_require__(275);
-	var BookmarkForm = __webpack_require__(277);
+	var Folder = __webpack_require__(274);
+	var BookmarkForm = __webpack_require__(275);
 	
 	var Navbar = React.createClass({
 	  displayName: 'Navbar',
@@ -27174,7 +27174,7 @@
 	              React.createElement(
 	                Link,
 	                { className: 'navbar-brand', to: '/' },
-	                'Book Kit'
+	                React.createElement('img', { src: 'logo.png', alt: 'Book Kit!' })
 	              )
 	            ),
 	            React.createElement(
@@ -29838,8 +29838,7 @@
 
 
 /***/ },
-/* 274 */,
-/* 275 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29866,99 +29865,7 @@
 	module.exports = Folder;
 
 /***/ },
-/* 276 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(1);
-	var connect = __webpack_require__(241).connect;
-	var router = __webpack_require__(176);
-	var Link = router.Link;
-	
-	// COMPONENT: Displays detailed information for a selected bookmark
-	var BookmarkView = React.createClass({
-	  displayName: 'BookmarkView',
-	
-	  render: function render() {
-	    if (this.props.bookmarks.length === 0) {
-	      return null;
-	    }
-	    // Will get the id of the item from the url
-	    var id = this.props.params.bookmarkId;
-	
-	    // filters through the bookmarks by the selected id
-	    var bookmark = this.props.bookmarks.filter(function (bookmark) {
-	      return id === bookmark.bookmarkid.toString();
-	    });
-	
-	    return React.createElement(
-	      'section',
-	      { className: 'bookmark-section' },
-	      React.createElement(
-	        'div',
-	        { className: 'col-md-6' },
-	        React.createElement(
-	          'h2',
-	          null,
-	          bookmark[0].title
-	        ),
-	        React.createElement(
-	          'h4',
-	          null,
-	          React.createElement(
-	            'a',
-	            { href: bookmark[0].url },
-	            bookmark[0].url
-	          )
-	        ),
-	        React.createElement(
-	          'p',
-	          null,
-	          bookmark[0].description
-	        ),
-	        React.createElement(
-	          'h4',
-	          null,
-	          'Folder:'
-	        ),
-	        React.createElement(
-	          'p',
-	          null,
-	          bookmark[0].foldername
-	        ),
-	        React.createElement(
-	          Link,
-	          { to: '/' },
-	          React.createElement(
-	            'button',
-	            { className: 'btn btn-default' },
-	            'Close'
-	          )
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'col-md-6' },
-	        React.createElement('img', { src: bookmark[0].screenshot, alt: 'placeholder-image', className: 'img-rounded', width: '400' })
-	      )
-	    );
-	  }
-	});
-	
-	// Grabs the bookmarks state from the store
-	var mapStateToProps = function mapStateToProps(state, props) {
-	  return {
-	    bookmarks: state.bookmarks
-	  };
-	};
-	
-	var Container = connect(mapStateToProps)(BookmarkView);
-	
-	module.exports = Container;
-
-/***/ },
-/* 277 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29974,7 +29881,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var connect = __webpack_require__(241).connect;
-	var Folder = __webpack_require__(283);
+	var Folder = __webpack_require__(276);
 	
 	var BookmarkForm = _react2.default.createClass({
 	  displayName: 'BookmarkForm',
@@ -30120,6 +30027,120 @@
 	};
 	
 	var Container = connect(mapStateToProps)(BookmarkForm);
+	
+	module.exports = Container;
+
+/***/ },
+/* 276 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var SelectFolder = React.createClass({
+	  displayName: 'SelectFolder',
+	
+	  render: function render() {
+	    return React.createElement(
+	      'option',
+	      { value: this.props.folder },
+	      this.props.folder
+	    );
+	  }
+	});
+	
+	module.exports = SelectFolder;
+
+/***/ },
+/* 277 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	var connect = __webpack_require__(241).connect;
+	var router = __webpack_require__(176);
+	var Link = router.Link;
+	
+	// COMPONENT: Displays detailed information for a selected bookmark
+	var BookmarkView = React.createClass({
+	  displayName: 'BookmarkView',
+	
+	  render: function render() {
+	    if (this.props.bookmarks.length === 0) {
+	      return null;
+	    }
+	    // Will get the id of the item from the url
+	    var id = this.props.params.bookmarkId;
+	
+	    // filters through the bookmarks by the selected id
+	    var bookmark = this.props.bookmarks.filter(function (bookmark) {
+	      return id === bookmark.bookmarkid.toString();
+	    });
+	
+	    return React.createElement(
+	      'section',
+	      { className: 'bookmark-section' },
+	      React.createElement(
+	        'div',
+	        { className: 'col-md-6' },
+	        React.createElement(
+	          'h2',
+	          null,
+	          bookmark[0].title
+	        ),
+	        React.createElement(
+	          'h4',
+	          null,
+	          React.createElement(
+	            'a',
+	            { href: bookmark[0].url },
+	            bookmark[0].url
+	          )
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          bookmark[0].description
+	        ),
+	        React.createElement(
+	          'h4',
+	          null,
+	          'Folder:'
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          bookmark[0].foldername
+	        ),
+	        React.createElement(
+	          Link,
+	          { to: '/' },
+	          React.createElement(
+	            'button',
+	            { className: 'btn btn-default' },
+	            'Close'
+	          )
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'col-md-6' },
+	        React.createElement('img', { src: bookmark[0].screenshot, alt: 'placeholder-image', className: 'img-rounded', width: '400' })
+	      )
+	    );
+	  }
+	});
+	
+	// Grabs the bookmarks state from the store
+	var mapStateToProps = function mapStateToProps(state, props) {
+	  return {
+	    bookmarks: state.bookmarks
+	  };
+	};
+	
+	var Container = connect(mapStateToProps)(BookmarkView);
 	
 	module.exports = Container;
 
@@ -30446,28 +30467,6 @@
 	});
 	
 	exports.rootReducer = rootReducer;
-
-/***/ },
-/* 283 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(1);
-	
-	var SelectFolder = React.createClass({
-	  displayName: 'SelectFolder',
-	
-	  render: function render() {
-	    return React.createElement(
-	      'option',
-	      { value: this.props.folder },
-	      this.props.folder
-	    );
-	  }
-	});
-	
-	module.exports = SelectFolder;
 
 /***/ }
 /******/ ]);
