@@ -21,7 +21,7 @@ var bookmarkReducer = function(state, action) {
   switch (action.type) {
     case actionTypes.ADD_BOOKMARK_SUCCESS: {
       let tempArr = state.slice();
-      tempArr.push(action.bookmark);
+      tempArr.unshift(action.bookmark);
       return tempArr;
     }
     case actionTypes.GET_BOOKMARKS_SUCCESS: {
@@ -51,7 +51,8 @@ var bookmarkReducer = function(state, action) {
           index = i;
         }
       });
-      return tempArr.slice(index, 1);
+      tempArr.splice(index, 1);
+      return tempArr;
     }
     case actionTypes.ADD_BOOKMARK_ERROR:
     case actionTypes.GET_BOOKMARKS_ERROR:
@@ -70,15 +71,28 @@ var bookmarkReducer = function(state, action) {
 var folderReducer = function(state, action) {
   // This part of the state is an array
   state = state || [];
-
+  var index;
+  console.log(action);
   switch (action.type) {
     case actionTypes.ADD_FOLDER_SUCCESS: {
       var newState = state.slice();
-      newState.push(action.folder.foldername);
+      newState.push(action.folder);
+      console.log('in reducer', newState);
       return newState;
     }
     case actionTypes.GET_FOLDERS_SUCCESS: {
       return action.folders;
+    }
+    case actionTypes.DELETE_FOLDER_SUCCESS: {
+      let tempArr = state.slice();
+      // TODO: fix method of deleting UX/UI
+      tempArr.forEach(function(value, i) {
+        if (value.foldername === action.folder.foldername) {
+          index = i;
+        }
+      });
+      tempArr.splice(index, 1);
+      return tempArr;
     }
     case actionTypes.ADD_FOLDER_ERROR:
     case actionTypes.GET_FOLDERS_ERROR: {

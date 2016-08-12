@@ -17,6 +17,7 @@ const Navbar = React.createClass({
   },
   render: function() {
     let folderArr = [];
+    console.log('in nav-header', this.props.folders);
     this.props.folders.forEach(function(folder, index) {
       folderArr.push(<Folder key={index} folder={folder}/>);
     });

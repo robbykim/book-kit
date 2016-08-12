@@ -88,6 +88,7 @@ var addFolder = function(newFolder) {
       }
       return res.json();
     }).then(function(folder) {
+      console.log('in addfolder', folder);
       return dispatch(addFolderSuccess(folder));
     }).catch(function(error) {
       return dispatch(addFolderError(error));
@@ -258,7 +259,7 @@ var editBookmark = function(editedBookmark) {
 var deleteBookmarkSuccess = function(deletedBookmark) {
   return {
     type: actionTypes.DELETE_BOOKMARK_SUCCESS,
-    bookmark: deleteBookmark
+    bookmark: deletedBookmark
   };
 };
 
@@ -269,9 +270,67 @@ var deleteBookmarkError = function(error) {
   };
 };
 
-var deleteBookmark = function(bookmark) {
+var deleteBookmark = function(bookmarkid) {
   return function(dispatch) {
-    return dispatch(deleteBookmark());
+    var init = {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    };
+    var url = 'https://shrouded-journey-65738.herokuapp.com/bookmark/' + bookmarkid;
+    fetch(url, init).then(function(res) {
+      if (res.status < 200 || res.status >= 300) {
+        var error = new Error(res.statusText);
+        error.response = res;
+        throw error;
+      }
+      return res.json();
+    }).then(function(bookmark) {
+      return dispatch(deleteBookmarkSuccess(bookmark));
+    }).catch(function(error) {
+      return dispatch(deleteBookmarkError(error));
+    });
+  };
+};
+
+var deleteFolderSuccess = function(deletedFolder) {
+  return {
+    type: actionTypes.DELETE_FOLDER_SUCCESS,
+    folder: deletedFolder
+  };
+};
+
+var deleteFolderError = function(error) {
+  return {
+    type: actionTypes.DELETE_FOLDER_ERROR,
+    error: error
+  };
+};
+
+var deleteFolder = function(foldername) {
+  return function(dispatch) {
+    var init = {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    };
+    var url = 'https://shrouded-journey-65738.herokuapp.com/folder/' + foldername;
+    fetch(url, init).then(function(res) {
+      if (res.status < 200 || res.status >= 300) {
+        var error = new Error(res.statusText);
+        error.response = res;
+        throw error;
+      }
+      return res.json();
+    }).then(function(folder) {
+      return dispatch(deleteFolderSuccess(folder));
+    }).catch(function(error) {
+      return dispatch(deleteFolderError(error));
+    });
   };
 };
 
@@ -291,4 +350,5 @@ exports.getBookmarksByFolder = getBookmarksByFolder;
 exports.getBookmarksByTag = getBookmarksByTag;
 exports.editBookmark = editBookmark;
 exports.deleteBookmark = deleteBookmark;
+exports.deleteFolder = deleteFolder;
 exports.confirmDeleteBookmark = confirmDeleteBookmark;

@@ -3,8 +3,8 @@ const React = require('react');
 const SelectFolder = React.createClass({
   render: function () {
     return (
-      <option value={this.props.folder}>
-        {this.props.folder}
+      <option value={this.props.folder.foldername}>
+        {this.props.folder.foldername}
       </option>
     );
   }
