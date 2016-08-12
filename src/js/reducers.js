@@ -83,9 +83,8 @@ var folderReducer = function(state, action) {
     }
     case actionTypes.DELETE_FOLDER_SUCCESS: {
       let tempArr = state.slice();
-      // TODO: fix method of deleting UX/UI
       tempArr.forEach(function(value, i) {
-        if (value.folderid === action.folder.folderid) {
+        if (value.folderid === action.folder[0].folderid) {
           index = i;
         }
       });

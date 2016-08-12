@@ -2,13 +2,10 @@ const React = require('react');
 const connect = require('react-redux').connect;
 const router = require('react-router');
 const Link = router.Link;
-const actions = require('./actions');
+const ConfirmDelete = require('./bookmark-confirm-delete');
 
 // COMPONENT: Displays detailed information for a selected bookmark
 const BookmarkView = React.createClass({
-  onDelete: function (id) {
-    this.props.dispatch(actions.deleteBookmark(id));
-  },
   render: function () {
     if (this.props.bookmarks.length === 0) {
       return null;
@@ -29,9 +26,15 @@ const BookmarkView = React.createClass({
           <p>{bookmark[0].description}</p>
           <h4>Folder:</h4>
           <p>{bookmark[0].foldername}</p>
-          <Link to={'/'}>
-            <button className="btn btn-default" onClick={() => this.onDelete(bookmark[0].bookmarkid)}>Delete</button>
-          </Link>
+
+          <a data-toggle="modal" data-target="#delete-bookmark">
+            <button className="btn btn-default">Delete</button>
+          </a>
+
+          <div className="modal fade" id="delete-bookmark">
+            <ConfirmDelete bookmarkId={bookmark[0].bookmarkid}/>
+          </div>
+
           <Link to={'/'}>
             <button className="btn btn-default">Close</button>
           </Link>

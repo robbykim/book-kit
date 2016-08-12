@@ -1,6 +1,9 @@
 var actionTypes = require('./constants');
 var storage = require('./storage');
 
+// URL for heroku: https://shrouded-journey-65738.herokuapp.com/
+// URL for localhost: https://localhost:5000
+
 /* Redux Action Creators */
 
 var fetch = require('isomorphic-fetch');
@@ -37,7 +40,7 @@ var addBookmark = function(newBookmark) {
       },
       body: JSON.stringify(newBookmark)
     };
-    var url = 'https://shrouded-journey-65738.herokuapp.com/bookmark';
+    var url = 'http://localhost:5000/bookmark';
     fetch(url, init).then(function(res) {
       if (res.status < 200 || res.status >= 300) {
         var error = new Error(res.statusText);
@@ -79,7 +82,7 @@ var addFolder = function(newFolder) {
         foldername: newFolder
       })
     };
-    var url = 'https://shrouded-journey-65738.herokuapp.com/folder';
+    var url = 'http://localhost:5000/folder';
     fetch(url, init).then(function(res) {
       if (res.status < 200 || res.status >= 300) {
         var error = new Error(res.statusText);
@@ -112,7 +115,7 @@ var getBookmarksError = function(error) {
 
 var getBookmarks = function() {
   return function(dispatch) {
-    var url = 'https://shrouded-journey-65738.herokuapp.com/bookmarks';
+    var url = 'http://localhost:5000/bookmarks';
     return fetch(url).then(function(res) {
       if (res.status < 200 || res.status >= 300) {
         var error = new Error(res.statusText);
@@ -148,7 +151,7 @@ var getFoldersError = function(error) {
 
 var getFolders = function() {
   return function(dispatch) {
-    var url = 'https://shrouded-journey-65738.herokuapp.com/folders';
+    var url = 'http://localhost:5000/folders';
     return fetch(url).then(function(res) {
       if (res.status < 200 || res.status >= 300) {
         var error = new Error(res.statusText);
@@ -278,7 +281,7 @@ var deleteBookmark = function(bookmarkid) {
         'Content-Type': 'application/json'
       }
     };
-    var url = 'https://shrouded-journey-65738.herokuapp.com/bookmark/' + bookmarkid;
+    var url = 'http://localhost:5000/bookmark/' + bookmarkid;
     fetch(url, init).then(function(res) {
       if (res.status < 200 || res.status >= 300) {
         var error = new Error(res.statusText);
@@ -317,7 +320,7 @@ var deleteFolder = function(folderid) {
         'Content-Type': 'application/json'
       }
     };
-    var url = 'https://shrouded-journey-65738.herokuapp.com/folder/' + folderid;
+    var url = 'http://localhost:5000/folder/' + folderid;
     fetch(url, init).then(function(res) {
       if (res.status < 200 || res.status >= 300) {
         var error = new Error(res.statusText);
