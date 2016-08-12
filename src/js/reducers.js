@@ -72,12 +72,10 @@ var folderReducer = function(state, action) {
   // This part of the state is an array
   state = state || [];
   var index;
-  console.log(action);
   switch (action.type) {
     case actionTypes.ADD_FOLDER_SUCCESS: {
       var newState = state.slice();
       newState.push(action.folder);
-      console.log('in reducer', newState);
       return newState;
     }
     case actionTypes.GET_FOLDERS_SUCCESS: {
@@ -87,7 +85,7 @@ var folderReducer = function(state, action) {
       let tempArr = state.slice();
       // TODO: fix method of deleting UX/UI
       tempArr.forEach(function(value, i) {
-        if (value.foldername === action.folder.foldername) {
+        if (value.folderid === action.folder.folderid) {
           index = i;
         }
       });

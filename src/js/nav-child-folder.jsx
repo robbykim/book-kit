@@ -4,18 +4,16 @@ const actions = require('./actions');
 const connect = require('react-redux').connect;
 
 const Folder = React.createClass({
-  onDelete: function (foldername) {
-    this.props.dispatch(actions.deleteFolder(foldername));
+  onDelete: function (id) {
+    this.props.dispatch(actions.deleteFolder(id));
   },
   render: function () {
-    console.log('in nav child', this.props.folder.foldername);
-    console.log('in nav child', this.props.folder.folderid);
     return (
       <li>
         <Link to={'/folders/' + this.props.folder.foldername}>
           {this.props.folder.foldername}
         </Link>
-        <span onClick={() => this.onDelete(this.props.folder.foldername)} className="glyphicon glyphicon-trash" aria-hidden="true"></span>
+        <span onClick={() => this.onDelete(this.props.folder.folderid)} className="glyphicon glyphicon-trash" aria-hidden="true"></span>
       </li>
     );
   }

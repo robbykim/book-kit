@@ -88,7 +88,6 @@ var addFolder = function(newFolder) {
       }
       return res.json();
     }).then(function(folder) {
-      console.log('in addfolder', folder);
       return dispatch(addFolderSuccess(folder));
     }).catch(function(error) {
       return dispatch(addFolderError(error));
@@ -186,7 +185,7 @@ var getTagsError = function(error) {
 var getTags = function() {
   return function(dispatch) {
     return dispatch(getTagsSuccess(storage.tags));
-  }
+  };
 };
 
 var getBookmarksByFolderSuccess = function(bookmarks) {
@@ -205,7 +204,7 @@ var getBookmarksByFolderError = function(error) {
 
 var getBookmarksByFolder = function(folder) {
   return function(dispatch) {
-    bookmarks = storage.bookmarks.filter(function(value) {
+    var bookmarks = storage.bookmarks.filter(function(value) {
       return value.FolderName === folder;
     });
     return dispatch(getBookmarksByFolderSuccess(bookmarks));
@@ -228,7 +227,7 @@ var getBookmarksByTagError = function(bookmarks) {
 
 var getBookmarksByTag = function(tag) {
   return function(dispatch) {
-    bookmarks = storage.bookmarks.filter(function(value) {
+    var bookmarks = storage.bookmarks.filter(function(value) {
       return value.tag.indexOf(tag) > 1;
     });
     return dispatch(getBookmarksByTagSuccess(bookmarks));
@@ -309,7 +308,7 @@ var deleteFolderError = function(error) {
   };
 };
 
-var deleteFolder = function(foldername) {
+var deleteFolder = function(folderid) {
   return function(dispatch) {
     var init = {
       method: 'DELETE',
@@ -318,7 +317,7 @@ var deleteFolder = function(foldername) {
         'Content-Type': 'application/json'
       }
     };
-    var url = 'https://shrouded-journey-65738.herokuapp.com/folder/' + foldername;
+    var url = 'https://shrouded-journey-65738.herokuapp.com/folder/' + folderid;
     fetch(url, init).then(function(res) {
       if (res.status < 200 || res.status >= 300) {
         var error = new Error(res.statusText);
