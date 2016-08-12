@@ -9,10 +9,15 @@ const BookmarkForm = React.createClass({
       url: this.refs.url.value,
       title: this.refs.title.value,
       description: this.refs.description.value,
-      foldername: this.refs.folder.value,
+      folderid: this.refs.folder.value,
       screenshot: this.refs.screenshot.value
       })
-    ); 
+    );
+    this.refs.url.value = '';
+    this.refs.title.value = '';
+    this.refs.description.value = '';
+    this.refs.folder.value = '';
+    this.refs.screenshot.value = '';
   },
   render: function () {
     let folderArr = [];
