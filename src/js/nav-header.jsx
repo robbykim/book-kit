@@ -14,6 +14,7 @@ const Navbar = React.createClass({
   postFolder: function (event) {
     event.preventDefault();
     this.props.dispatch(actions.addFolder(this.refs.newFolder.value));
+    this.refs.newFolder.value = '';
   },
   render: function() {
     let folderArr = [];
@@ -47,8 +48,6 @@ const Navbar = React.createClass({
               </div>
             </form>
             <ul className="nav navbar-nav navbar-right">
-                {/* DROPDOWN */}
-
               <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Folders <span className="caret"></span></a>
                 <ul className="dropdown-menu">
@@ -60,10 +59,7 @@ const Navbar = React.createClass({
                   {folderArr}
                 </ul>
               </li>
-
-                {/* END DROPDOWN */}
             </ul>
-
           </div>
         </nav>
       </header>
