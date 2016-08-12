@@ -27149,6 +27149,7 @@
 	  postFolder: function postFolder(event) {
 	    event.preventDefault();
 	    this.props.dispatch(actions.addFolder(this.refs.newFolder.value));
+	    this.refs.newFolder.value = '';
 	  },
 	  render: function render() {
 	    var folderArr = [];
@@ -29201,7 +29202,7 @@
 	
 	var getBookmarksByFolder = function getBookmarksByFolder(folder) {
 	  return function (dispatch) {
-	    bookmarks = storage.bookmarks.filter(function (value) {
+	    var bookmarks = storage.bookmarks.filter(function (value) {
 	      return value.FolderName === folder;
 	    });
 	    return dispatch(getBookmarksByFolderSuccess(bookmarks));
@@ -29224,7 +29225,7 @@
 	
 	var getBookmarksByTag = function getBookmarksByTag(tag) {
 	  return function (dispatch) {
-	    bookmarks = storage.bookmarks.filter(function (value) {
+	    var bookmarks = storage.bookmarks.filter(function (value) {
 	      return value.tag.indexOf(tag) > 1;
 	    });
 	    return dispatch(getBookmarksByTagSuccess(bookmarks));
@@ -29255,7 +29256,7 @@
 	var deleteBookmarkSuccess = function deleteBookmarkSuccess(deletedBookmark) {
 	  return {
 	    type: actionTypes.DELETE_BOOKMARK_SUCCESS,
-	    bookmark: deleteBookmark
+	    bookmark: deletedBookmark
 	  };
 	};
 	
@@ -29266,9 +29267,67 @@
 	  };
 	};
 	
-	var deleteBookmark = function deleteBookmark(bookmark) {
+	var deleteBookmark = function deleteBookmark(bookmarkid) {
 	  return function (dispatch) {
-	    return dispatch(deleteBookmark());
+	    var init = {
+	      method: 'DELETE',
+	      headers: {
+	        'Accept': 'application/json',
+	        'Content-Type': 'application/json'
+	      }
+	    };
+	    var url = 'https://shrouded-journey-65738.herokuapp.com/bookmark/' + bookmarkid;
+	    fetch(url, init).then(function (res) {
+	      if (res.status < 200 || res.status >= 300) {
+	        var error = new Error(res.statusText);
+	        error.response = res;
+	        throw error;
+	      }
+	      return res.json();
+	    }).then(function (bookmark) {
+	      return dispatch(deleteBookmarkSuccess(bookmark));
+	    }).catch(function (error) {
+	      return dispatch(deleteBookmarkError(error));
+	    });
+	  };
+	};
+	
+	var deleteFolderSuccess = function deleteFolderSuccess(deletedFolder) {
+	  return {
+	    type: actionTypes.DELETE_FOLDER_SUCCESS,
+	    folder: deletedFolder
+	  };
+	};
+	
+	var deleteFolderError = function deleteFolderError(error) {
+	  return {
+	    type: actionTypes.DELETE_FOLDER_ERROR,
+	    error: error
+	  };
+	};
+	
+	var deleteFolder = function deleteFolder(folderid) {
+	  return function (dispatch) {
+	    var init = {
+	      method: 'DELETE',
+	      headers: {
+	        'Accept': 'application/json',
+	        'Content-Type': 'application/json'
+	      }
+	    };
+	    var url = 'https://shrouded-journey-65738.herokuapp.com/folder/' + folderid;
+	    fetch(url, init).then(function (res) {
+	      if (res.status < 200 || res.status >= 300) {
+	        var error = new Error(res.statusText);
+	        error.response = res;
+	        throw error;
+	      }
+	      return res.json();
+	    }).then(function (folder) {
+	      return dispatch(deleteFolderSuccess(folder));
+	    }).catch(function (error) {
+	      return dispatch(deleteFolderError(error));
+	    });
 	  };
 	};
 	
@@ -29288,6 +29347,7 @@
 	exports.getBookmarksByTag = getBookmarksByTag;
 	exports.editBookmark = editBookmark;
 	exports.deleteBookmark = deleteBookmark;
+	exports.deleteFolder = deleteFolder;
 	exports.confirmDeleteBookmark = confirmDeleteBookmark;
 
 /***/ },
@@ -29325,6 +29385,8 @@
 	/* DELETE HTTP requests */
 	var DELETE_BOOKMARK_SUCCESS = 'DELETE_BOOKMARK_SUCCESS'; // '/bookmark/:id'
 	var DELETE_BOOKMARK_ERROR = 'DELETE_BOOKMARK_ERROR';
+	var DELETE_FOLDER_SUCCESS = 'DELETE_FOLDER_SUCCESS'; // '/bookmark/:id'
+	var DELETE_FOLDER_ERROR = 'DELETE_FOLDER_ERROR';
 	
 	exports.SHOW_FOLDER_INPUT = SHOW_FOLDER_INPUT;
 	exports.SEARCH_TEXT_CHANGE = SEARCH_TEXT_CHANGE;
@@ -29348,6 +29410,8 @@
 	exports.EDIT_BOOKMARK_ERROR = EDIT_BOOKMARK_ERROR;
 	exports.DELETE_BOOKMARK_SUCCESS = DELETE_BOOKMARK_SUCCESS;
 	exports.DELETE_BOOKMARK_ERROR = DELETE_BOOKMARK_ERROR;
+	exports.DELETE_FOLDER_SUCCESS = DELETE_FOLDER_SUCCESS;
+	exports.DELETE_FOLDER_ERROR = DELETE_FOLDER_ERROR;
 	// exports.LOAD_BOOKMARK_FORM = LOAD_BOOKMARK_FORM;
 	// exports.VIEW_BOOKMARK = VIEW_BOOKMARK;
 	// exports.CLOSE_BOOKMARK = CLOSE_BOOKMARK;
@@ -29845,24 +29909,36 @@
 	
 	var React = __webpack_require__(1);
 	var Link = __webpack_require__(176).Link;
+	var actions = __webpack_require__(269);
+	var connect = __webpack_require__(241).connect;
 	
 	var Folder = React.createClass({
 	  displayName: 'Folder',
 	
+	  onDelete: function onDelete(id) {
+	    this.props.dispatch(actions.deleteFolder(id));
+	  },
 	  render: function render() {
+	    var _this = this;
+	
 	    return React.createElement(
 	      'li',
 	      null,
 	      React.createElement(
 	        Link,
-	        { to: '/folders/' + this.props.folder },
-	        this.props.folder
-	      )
+	        { to: '/folders/' + this.props.folder.foldername },
+	        this.props.folder.foldername
+	      ),
+	      React.createElement('span', { onClick: function onClick() {
+	          return _this.onDelete(_this.props.folder.folderid);
+	        }, className: 'glyphicon glyphicon-trash', 'aria-hidden': 'true' })
 	    );
 	  }
 	});
 	
-	module.exports = Folder;
+	var Container = connect()(Folder);
+	
+	module.exports = Container;
 
 /***/ },
 /* 275 */
@@ -29891,9 +29967,14 @@
 	      url: this.refs.url.value,
 	      title: this.refs.title.value,
 	      description: this.refs.description.value,
-	      foldername: this.refs.folder.value,
+	      folderid: this.refs.folder.value,
 	      screenshot: this.refs.screenshot.value
 	    }));
+	    this.refs.url.value = '';
+	    this.refs.title.value = '';
+	    this.refs.description.value = '';
+	    this.refs.folder.value = '';
+	    this.refs.screenshot.value = '';
 	  },
 	  render: function render() {
 	    var folderArr = [];
@@ -30044,8 +30125,8 @@
 	  render: function render() {
 	    return React.createElement(
 	      'option',
-	      { value: this.props.folder },
-	      this.props.folder
+	      { value: this.props.folder.folderid },
+	      this.props.folder.foldername
 	    );
 	  }
 	});
@@ -30062,12 +30143,18 @@
 	var connect = __webpack_require__(241).connect;
 	var router = __webpack_require__(176);
 	var Link = router.Link;
+	var actions = __webpack_require__(269);
 	
 	// COMPONENT: Displays detailed information for a selected bookmark
 	var BookmarkView = React.createClass({
 	  displayName: 'BookmarkView',
 	
+	  onDelete: function onDelete(id) {
+	    this.props.dispatch(actions.deleteBookmark(id));
+	  },
 	  render: function render() {
+	    var _this = this;
+	
 	    if (this.props.bookmarks.length === 0) {
 	      return null;
 	    }
@@ -30113,6 +30200,17 @@
 	          'p',
 	          null,
 	          bookmark[0].foldername
+	        ),
+	        React.createElement(
+	          Link,
+	          { to: '/' },
+	          React.createElement(
+	            'button',
+	            { className: 'btn btn-default', onClick: function onClick() {
+	                return _this.onDelete(bookmark[0].bookmarkid);
+	              } },
+	            'Delete'
+	          )
 	        ),
 	        React.createElement(
 	          Link,
@@ -30359,7 +30457,7 @@
 	    case actionTypes.ADD_BOOKMARK_SUCCESS:
 	      {
 	        var tempArr = state.slice();
-	        tempArr.push(action.bookmark);
+	        tempArr.unshift(action.bookmark);
 	        return tempArr;
 	      }
 	    case actionTypes.GET_BOOKMARKS_SUCCESS:
@@ -30394,7 +30492,8 @@
 	            index = i;
 	          }
 	        });
-	        return _tempArr2.slice(index, 1);
+	        _tempArr2.splice(index, 1);
+	        return _tempArr2;
 	      }
 	    case actionTypes.ADD_BOOKMARK_ERROR:
 	    case actionTypes.GET_BOOKMARKS_ERROR:
@@ -30415,17 +30514,29 @@
 	var folderReducer = function folderReducer(state, action) {
 	  // This part of the state is an array
 	  state = state || [];
-	
+	  var index;
 	  switch (action.type) {
 	    case actionTypes.ADD_FOLDER_SUCCESS:
 	      {
 	        var newState = state.slice();
-	        newState.push(action.folder.foldername);
+	        newState.push(action.folder);
 	        return newState;
 	      }
 	    case actionTypes.GET_FOLDERS_SUCCESS:
 	      {
 	        return action.folders;
+	      }
+	    case actionTypes.DELETE_FOLDER_SUCCESS:
+	      {
+	        var tempArr = state.slice();
+	        // TODO: fix method of deleting UX/UI
+	        tempArr.forEach(function (value, i) {
+	          if (value.folderid === action.folder.folderid) {
+	            index = i;
+	          }
+	        });
+	        tempArr.splice(index, 1);
+	        return tempArr;
 	      }
 	    case actionTypes.ADD_FOLDER_ERROR:
 	    case actionTypes.GET_FOLDERS_ERROR:
