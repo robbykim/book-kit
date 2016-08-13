@@ -253,6 +253,48 @@ var addFolder = function(newFolder) {
   };
 };
 
+// Put Requests
+var editFolderSuccess = function(editedFolder) {
+  return {
+    type: actionTypes.EDIT_FOLDER_SUCCESS,
+    folder: editedFolder
+  };
+};
+
+var editFolderError = function(error) {
+  return {
+    type: actionTypes.EDIT_FOLDER_ERROR,
+    folder: error
+  };
+};
+
+var editFolder = function(editedFolder) {
+  return function(dispatch) {
+    var init = {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(editedFolder)
+    };
+    var url = 'http://localhost:5000/folders/' + editedFolder.folderid;
+    fetch(url, init).then(function(res) {
+      if (res.status < 200 || res.status >= 300) {
+        var error = new Error(res.statusText);
+        error.response = res;
+        throw error;
+      }
+      return res.json();
+    }).then(function(editedFolder) {
+      dispatch(editFolderSuccess(editedFolder));
+    }).catch(function(error) {
+      dispatch(editFolderError(error));
+    });
+  };
+};
+
+
 // Delete Requests
 var deleteFolderSuccess = function(deletedFolder) {
   return {
@@ -323,5 +365,6 @@ exports.getBookmarks = getBookmarks;
 exports.getFolders = getFolders;
 exports.getTags = getTags;
 exports.editBookmark = editBookmark;
+exports.editFolder = editFolder;
 exports.deleteBookmark = deleteBookmark;
 exports.deleteFolder = deleteFolder;
