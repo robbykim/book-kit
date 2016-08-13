@@ -30,12 +30,12 @@ var bookmarkReducer = function(state, action) {
   case actionTypes.EDIT_BOOKMARK_SUCCESS: {
     let tempArr = state.slice();
     tempArr.forEach(function(value, i) {
-      if (value.id === action.bookmark.id) {
+      if (value.bookmarkid === action.bookmark[0].bookmarkid) {
         index = i;
       }
     });
-    tempArr[index] = action.bookmark;
-    return state;
+    tempArr[index] = action.bookmark[0];
+    return tempArr;
   }
   case actionTypes.DELETE_BOOKMARK_SUCCESS: {
     let tempArr = state.slice();
@@ -72,6 +72,16 @@ var folderReducer = function(state, action) {
   case actionTypes.GET_FOLDERS_SUCCESS: {
     return action.folders;
   }
+  case actionTypes.EDIT_FOLDER_SUCCESS: {
+    let tempArr = state.slice();
+    tempArr.forEach(function(value, i) {
+      if (value.folderid === action.folder[0].folderid) {
+        index = i;
+      }
+    });
+    tempArr[index] = action.folder[0];
+    return tempArr;
+  }
   case actionTypes.DELETE_FOLDER_SUCCESS: {
     let tempArr = state.slice();
     tempArr.forEach(function(value, i) {
@@ -83,7 +93,9 @@ var folderReducer = function(state, action) {
     return tempArr;
   }
   case actionTypes.ADD_FOLDER_ERROR:
-  case actionTypes.GET_FOLDERS_ERROR: {
+  case actionTypes.GET_FOLDERS_ERROR:
+  case actionTypes.EDIT_FOLDER_ERROR:
+  case actionTypes.DELETE_FOLDER_ERROR: {
     return state;
   }
   default: {
