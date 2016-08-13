@@ -13,90 +13,8 @@ var searchTextChange = function(text) {
   };
 };
 
-// Post Requests
-var addBookmarkSuccess = function(newBookmark) {
-  return {
-    type: actionTypes.ADD_BOOKMARK_SUCCESS,
-    bookmark: newBookmark
-  };
-};
-
-var addBookmarkError = function(error) {
-  return {
-    type: actionTypes.ADD_BOOKMARK_ERROR,
-    error: error
-  };
-};
-
-var addBookmark = function(newBookmark) {
-  return function(dispatch) {
-    var init = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newBookmark)
-    };
-    var url = 'http://localhost:5000/bookmark';
-    fetch(url, init).then(function(res) {
-      if (res.status < 200 || res.status >= 300) {
-        var error = new Error(res.statusText);
-        error.reponse = res;
-        throw error;
-      }
-      return res.json();
-    }).then(function(bookmark) {
-      return dispatch(addBookmarkSuccess(bookmark));
-    }).catch(function(error) {
-      return dispatch(addBookmarkError(error));
-    });
-  };
-};
-
-var addFolderSuccess = function(newFolderName) {
-  return {
-    type: actionTypes.ADD_FOLDER_SUCCESS,
-    folder: newFolderName
-  };
-};
-
-var addFolderError = function(error) {
-  return {
-    type: actionTypes.ADD_FOLDER_ERROR,
-    error: error
-  };
-};
-
-var addFolder = function(newFolder) {
-  return function(dispatch) {
-    var init = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        foldername: newFolder
-      })
-    };
-    var url = 'http://localhost:5000/folder';
-    fetch(url, init).then(function(res) {
-      if (res.status < 200 || res.status >= 300) {
-        var error = new Error(res.statusText);
-        error.response = res;
-        throw error;
-      }
-      return res.json();
-    }).then(function(folder) {
-      return dispatch(addFolderSuccess(folder));
-    }).catch(function(error) {
-      return dispatch(addFolderError(error));
-    });
-  };
-};
-
-// Get requests
+/* BOOKMARK ACTIONS */
+// Get Requests
 var getBookmarksSuccess = function(bookmarks) {
   return {
     type: actionTypes.GET_BOOKMARKS_SUCCESS,
@@ -132,7 +50,130 @@ var getBookmarks = function() {
     });
   };
 };
+// Post Requests
+var addBookmarkSuccess = function(newBookmark) {
+  return {
+    type: actionTypes.ADD_BOOKMARK_SUCCESS,
+    bookmark: newBookmark
+  };
+};
 
+var addBookmarkError = function(error) {
+  return {
+    type: actionTypes.ADD_BOOKMARK_ERROR,
+    error: error
+  };
+};
+
+var addBookmark = function(newBookmark) {
+  return function(dispatch) {
+    var init = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newBookmark)
+    };
+    var url = 'http://localhost:5000/bookmarks';
+    fetch(url, init).then(function(res) {
+      if (res.status < 200 || res.status >= 300) {
+        var error = new Error(res.statusText);
+        error.reponse = res;
+        throw error;
+      }
+      return res.json();
+    }).then(function(bookmark) {
+      return dispatch(addBookmarkSuccess(bookmark));
+    }).catch(function(error) {
+      return dispatch(addBookmarkError(error));
+    });
+  };
+};
+
+// Put Requests
+var editBookmarkSuccess = function(editedBookmark) {
+  return {
+    type: actionTypes.EDIT_BOOKMARK_SUCCESS,
+    bookmark: editedBookmark
+  };
+};
+
+var editBookmarkError = function(error) {
+  return {
+    type: actionTypes.EDIT_BOOKMARK_ERROR,
+    error: error
+  };
+};
+
+var editBookmark = function(editedBookmark) {
+  return function(dispatch) {
+    var init = {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(editedBookmark)
+    };
+    var url = 'http://localhost:5000/bookmarks/' + editedBookmark.bookmarkid;
+    fetch(url, init).then(function(res) {
+      if (res.status < 200 || res.status >= 300) {
+        var error = new Error(res.statusText);
+        error.response = res;
+        throw error;
+      }
+      return res.json();
+    }).then(function(editedBookmark) {
+      return dispatch(editBookmarkSuccess(editedBookmark));
+    }).catch(function(err) {
+      return dispatch(editBookmarkError(err));
+    });
+  };
+};
+
+// Delete Requests
+var deleteBookmarkSuccess = function(deletedBookmark) {
+  return {
+    type: actionTypes.DELETE_BOOKMARK_SUCCESS,
+    bookmark: deletedBookmark
+  };
+};
+
+var deleteBookmarkError = function(error) {
+  return {
+    type: actionTypes.DELETE_BOOKMARK_ERROR,
+    error: error
+  };
+};
+
+var deleteBookmark = function(bookmarkid) {
+  return function(dispatch) {
+    var init = {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    };
+    var url = 'http://localhost:5000/bookmarks/' + bookmarkid;
+    fetch(url, init).then(function(res) {
+      if (res.status < 200 || res.status >= 300) {
+        var error = new Error(res.statusText);
+        error.response = res;
+        throw error;
+      }
+      return res.json();
+    }).then(function(bookmark) {
+      return dispatch(deleteBookmarkSuccess(bookmark));
+    }).catch(function(error) {
+      return dispatch(deleteBookmarkError(error));
+    });
+  };
+};
+
+/* FOLDER ACTIONS */
+// Get Requests
 var getFoldersSuccess = function(folders) {
   return {
     type: actionTypes.GET_FOLDERS_SUCCESS,
@@ -169,71 +210,34 @@ var getFolders = function() {
   };
 };
 
-var getTagsSuccess = function(tags) {
+// Post Requests
+var addFolderSuccess = function(newFolderName) {
   return {
-    type: actionTypes.GET_TAGS_SUCCESS,
-    tags: tags
+    type: actionTypes.ADD_FOLDER_SUCCESS,
+    folder: newFolderName
   };
 };
 
-var getTagsError = function(error) {
+var addFolderError = function(error) {
   return {
-    type: actionTypes.GET_TAGS_ERROR,
+    type: actionTypes.ADD_FOLDER_ERROR,
     error: error
   };
 };
 
-var getTags = function() {
-  // return function(dispatch) {
-    // return dispatch(getTagsSuccess(storage.tags));
-  // };
-};
-
-// Put requests
-var editBookmarkSuccess = function(editedBookmark) {
-  return {
-    type: actionTypes.EDIT_BOOKMARK_SUCCESS,
-    bookmark: editedBookmark
-  };
-};
-
-var editBookmarkError = function(error) {
-  return {
-    type: actionTypes.EDIT_BOOKMARK_ERROR,
-    error: error
-  };
-};
-
-var editBookmark = function(editedBookmark) {
-  return function(dispatch) {
-    return dispatch(editBookmark());
-  };
-};
-
-var deleteBookmarkSuccess = function(deletedBookmark) {
-  return {
-    type: actionTypes.DELETE_BOOKMARK_SUCCESS,
-    bookmark: deletedBookmark
-  };
-};
-
-var deleteBookmarkError = function(error) {
-  return {
-    type: actionTypes.DELETE_BOOKMARK_ERROR,
-    error: error
-  };
-};
-
-var deleteBookmark = function(bookmarkid) {
+var addFolder = function(newFolder) {
   return function(dispatch) {
     var init = {
-      method: 'DELETE',
+      method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-      }
+      },
+      body: JSON.stringify({
+        foldername: newFolder
+      })
     };
-    var url = 'http://localhost:5000/bookmark/' + bookmarkid;
+    var url = 'http://localhost:5000/folders';
     fetch(url, init).then(function(res) {
       if (res.status < 200 || res.status >= 300) {
         var error = new Error(res.statusText);
@@ -241,14 +245,15 @@ var deleteBookmark = function(bookmarkid) {
         throw error;
       }
       return res.json();
-    }).then(function(bookmark) {
-      return dispatch(deleteBookmarkSuccess(bookmark));
+    }).then(function(folder) {
+      return dispatch(addFolderSuccess(folder));
     }).catch(function(error) {
-      return dispatch(deleteBookmarkError(error));
+      return dispatch(addFolderError(error));
     });
   };
 };
 
+// Delete Requests
 var deleteFolderSuccess = function(deletedFolder) {
   return {
     type: actionTypes.DELETE_FOLDER_SUCCESS,
@@ -272,7 +277,7 @@ var deleteFolder = function(folderid) {
         'Content-Type': 'application/json'
       }
     };
-    var url = 'http://localhost:5000/folder/' + folderid;
+    var url = 'http://localhost:5000/folders/' + folderid;
     fetch(url, init).then(function(res) {
       if (res.status < 200 || res.status >= 300) {
         var error = new Error(res.statusText);
@@ -288,10 +293,27 @@ var deleteFolder = function(folderid) {
   };
 };
 
-var confirmDeleteBookmark = function() {
+/* TAGS ACTIONS */
+// Get Requests
+
+var getTagsSuccess = function(tags) {
   return {
-    type: actionTypes.CONFIRM_DELETE_BOOKMARK
+    type: actionTypes.GET_TAGS_SUCCESS,
+    tags: tags
   };
+};
+
+var getTagsError = function(error) {
+  return {
+    type: actionTypes.GET_TAGS_ERROR,
+    error: error
+  };
+};
+
+var getTags = function() {
+  // return function(dispatch) {
+    // return dispatch(getTagsSuccess(storage.tags));
+  // };
 };
 
 exports.searchTextChange = searchTextChange;
@@ -303,4 +325,3 @@ exports.getTags = getTags;
 exports.editBookmark = editBookmark;
 exports.deleteBookmark = deleteBookmark;
 exports.deleteFolder = deleteFolder;
-exports.confirmDeleteBookmark = confirmDeleteBookmark;
