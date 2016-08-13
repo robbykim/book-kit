@@ -1,7 +1,7 @@
-const React = require('react');
-const Link = require('react-router').Link;
-const actions = require('./actions');
-const connect = require('react-redux').connect;
+import React from 'react';
+import actions from '../redux/actions';
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
 const Folder = React.createClass({
   onDelete: function (id) {

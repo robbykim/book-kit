@@ -1,10 +1,9 @@
-const React = require('react');
-const router = require('react-router');
-const Link = router.Link;
-const connect = require('react-redux').connect;
-const actions = require('./actions');
-const Folder = require('./nav-child-folder');
-const BookmarkForm = require('./bookmark-form');
+import React from 'react';
+import actions from '../redux/actions';
+import Folder from './nav-child-folder';
+import BookmarkForm from '../content/bookmark-form';
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
 const Navbar = React.createClass({
   onAddInput: function (event) {

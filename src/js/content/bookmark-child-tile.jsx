@@ -1,6 +1,5 @@
-const React = require('react');
-const router = require('react-router');
-const Link = router.Link;
+import React from 'react';
+import { Link } from 'react-router';
 
 // COMPONENT: Displays the individual Tiles of bookmarks on the main page
 const Tile = React.createClass({

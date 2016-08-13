@@ -1,6 +1,6 @@
-const React = require('react');
-const Tile = require('./bookmark-child-tile');
-const connect = require('react-redux').connect;
+import React from 'react';
+import Tile from './bookmark-child-tile';
+import { connect } from 'react-redux';
 
 // COMPONENT: Displays the collection of tiles on the main page
 const BookmarkTiles = React.createClass({

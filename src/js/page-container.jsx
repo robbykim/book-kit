@@ -1,7 +1,7 @@
-const React = require('react');
-const Nav = require('./nav-header');
-const actions = require('./actions');
-const connect = require('react-redux').connect;
+import React from 'react';
+import Nav from './nav/nav-header';
+import actions from './redux/actions';
+import { connect } from 'react-redux';
 
 const PageContainer = React.createClass({
   componentDidMount: function () {

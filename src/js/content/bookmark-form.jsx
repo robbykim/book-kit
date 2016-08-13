@@ -1,7 +1,7 @@
 import React from 'react';
-import actions from './actions';
-const connect = require('react-redux').connect;
-const Folder = require('./bookmark-form-folder');
+import actions from '../redux/actions';
+import Folder from './bookmark-form-folder';
+import { connect } from 'react-redux';
 
 const BookmarkForm = React.createClass({
   addBookmark: function () {
@@ -11,7 +11,7 @@ const BookmarkForm = React.createClass({
       description: this.refs.description.value,
       folderid: this.refs.folder.value,
       screenshot: this.refs.screenshot.value
-      })
+    })
     );
     this.refs.url.value = '';
     this.refs.title.value = '';

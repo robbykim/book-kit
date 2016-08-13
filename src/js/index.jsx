@@ -1,8 +1,8 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-const routes = require('./routes/routes');
-const Provider = require('react-redux').Provider;
-const store = require('./store');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import routes from './routes/routes';
+import store from './redux/store';
+import { Provider } from 'react-redux';
 
 document.addEventListener('DOMContentLoaded', function () {
   ReactDOM.render(

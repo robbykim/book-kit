@@ -1,12 +1,10 @@
-var actionTypes = require('./constants');
-var storage = require('./storage');
+import actionTypes from './constants';
+import fetch from 'isomorphic-fetch';
 
 // URL for heroku: https://shrouded-journey-65738.herokuapp.com/
 // URL for localhost: https://localhost:5000
 
 /* Redux Action Creators */
-
-var fetch = require('isomorphic-fetch');
 
 var searchTextChange = function(text) {
   return {
@@ -35,8 +33,8 @@ var addBookmark = function(newBookmark) {
     var init = {
       method: 'POST',
       headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(newBookmark)
     };
@@ -75,8 +73,8 @@ var addFolder = function(newFolder) {
     var init = {
       method: 'POST',
       headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         foldername: newFolder
@@ -187,7 +185,7 @@ var getTagsError = function(error) {
 
 var getTags = function() {
   return function(dispatch) {
-    return dispatch(getTagsSuccess(storage.tags));
+    // return dispatch(getTagsSuccess(storage.tags));
   };
 };
 
@@ -207,9 +205,9 @@ var getBookmarksByFolderError = function(error) {
 
 var getBookmarksByFolder = function(folder) {
   return function(dispatch) {
-    var bookmarks = storage.bookmarks.filter(function(value) {
-      return value.FolderName === folder;
-    });
+    // var bookmarks = storage.bookmarks.filter(function(value) {
+    //   return value.FolderName === folder;
+    // });
     return dispatch(getBookmarksByFolderSuccess(bookmarks));
   };
 };
@@ -221,7 +219,7 @@ var getBookmarksByTagSuccess = function(bookmarks) {
   };
 };
 
-var getBookmarksByTagError = function(bookmarks) {
+var getBookmarksByTagError = function(error) {
   return {
     type: actionTypes.GET_BOOKMARKS_BY_TAG_ERROR,
     error: error
@@ -230,9 +228,9 @@ var getBookmarksByTagError = function(bookmarks) {
 
 var getBookmarksByTag = function(tag) {
   return function(dispatch) {
-    var bookmarks = storage.bookmarks.filter(function(value) {
-      return value.tag.indexOf(tag) > 1;
-    });
+    // var bookmarks = storage.bookmarks.filter(function(value) {
+    //   return value.tag.indexOf(tag) > 1;
+    // });
     return dispatch(getBookmarksByTagSuccess(bookmarks));
   };
 };

@@ -1,14 +1,8 @@
-const React = require('react');
-
-const router = require('react-router');
-const Router = router.Router;
-const Route = router.Route;
-const hashHistory = router.hashHistory;
-const IndexRoute = router.IndexRoute;
-
-const PageContainer = require('../page-container');
-const BookmarkView = require('../bookmark-view');
-const BookmarkTiles = require('../bookmark-tiles');
+import React from 'react';
+import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+import PageContainer from '../page-container';
+import BookmarkView from '../content/bookmark-view';
+import BookmarkTiles from '../content/bookmark-tiles';
 
 const routes = (
   <Router history={hashHistory}>

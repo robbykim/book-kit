@@ -1,8 +1,7 @@
-const React = require('react');
-const connect = require('react-redux').connect;
-const router = require('react-router');
-const Link = router.Link;
-const ConfirmDelete = require('./bookmark-confirm-delete');
+import React from 'react';
+import ConfirmDelete from './bookmark-confirm-delete';
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 // COMPONENT: Displays detailed information for a selected bookmark
 const BookmarkView = React.createClass({

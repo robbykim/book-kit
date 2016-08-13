@@ -1,5 +1,5 @@
-var actionTypes = require('./constants');
-var combineReducers = require('redux').combineReducers;
+import actionTypes from './constants';
+import { combineReducers } from 'redux';
 
 var searchReducer = function(state, action) {
   state = state || '';
