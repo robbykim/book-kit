@@ -184,55 +184,9 @@ var getTagsError = function(error) {
 };
 
 var getTags = function() {
-  return function(dispatch) {
+  // return function(dispatch) {
     // return dispatch(getTagsSuccess(storage.tags));
-  };
-};
-
-var getBookmarksByFolderSuccess = function(bookmarks) {
-  return {
-    type: actionTypes.GET_BOOKMARKS_BY_FOLDER_SUCCESS,
-    bookmarks: bookmarks
-  };
-};
-
-var getBookmarksByFolderError = function(error) {
-  return {
-    type: actionTypes.GET_BOOKMARKS_BY_FOLDER_ERROR,
-    error: error
-  };
-};
-
-var getBookmarksByFolder = function(folder) {
-  return function(dispatch) {
-    // var bookmarks = storage.bookmarks.filter(function(value) {
-    //   return value.FolderName === folder;
-    // });
-    return dispatch(getBookmarksByFolderSuccess(bookmarks));
-  };
-};
-
-var getBookmarksByTagSuccess = function(bookmarks) {
-  return {
-    type: actionTypes.GET_BOOKMARKS_BY_TAG_SUCCESS,
-    bookmarks: bookmarks
-  };
-};
-
-var getBookmarksByTagError = function(error) {
-  return {
-    type: actionTypes.GET_BOOKMARKS_BY_TAG_ERROR,
-    error: error
-  };
-};
-
-var getBookmarksByTag = function(tag) {
-  return function(dispatch) {
-    // var bookmarks = storage.bookmarks.filter(function(value) {
-    //   return value.tag.indexOf(tag) > 1;
-    // });
-    return dispatch(getBookmarksByTagSuccess(bookmarks));
-  };
+  // };
 };
 
 // Put requests
@@ -346,8 +300,6 @@ exports.addFolder = addFolder;
 exports.getBookmarks = getBookmarks;
 exports.getFolders = getFolders;
 exports.getTags = getTags;
-exports.getBookmarksByFolder = getBookmarksByFolder;
-exports.getBookmarksByTag = getBookmarksByTag;
 exports.editBookmark = editBookmark;
 exports.deleteBookmark = deleteBookmark;
 exports.deleteFolder = deleteFolder;
