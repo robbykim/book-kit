@@ -1,6 +1,6 @@
 import React from 'react';
 import actions from '../redux/actions';
-import Folder from './nav-child-folder';
+import Folder from './nav-folder-container';
 import BookmarkForm from '../content/bookmark-form';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
