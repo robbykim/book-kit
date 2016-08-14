@@ -10,6 +10,8 @@ const Folder = React.createClass({
   onEdit: function (event) {
     event.preventDefault();
     console.log(this.refs.editedFolder.value);
+    // this.props.onShowEdit;
+    // TODO: enable show state when submitted
   },
   render: function () {
     var textStyle = this.props.show ? { display: 'none' } : {};
