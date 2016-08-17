@@ -1,7 +1,7 @@
 import actionTypes from './constants';
 import { combineReducers } from 'redux';
 
-var searchReducer = function(state, action) {
+const searchReducer = (state, action) => {
   state = state || '';
 
   switch (action.type) {
@@ -14,9 +14,9 @@ var searchReducer = function(state, action) {
   }
 };
 
-var bookmarkReducer = function(state, action) {
+const bookmarkReducer = (state, action) => {
   state = state || [];
-  var index;
+  let index;
 
   switch (action.type) {
   case actionTypes.ADD_BOOKMARK_SUCCESS: {
@@ -29,7 +29,7 @@ var bookmarkReducer = function(state, action) {
   }
   case actionTypes.EDIT_BOOKMARK_SUCCESS: {
     let tempArr = state.slice();
-    tempArr.forEach(function(value, i) {
+    tempArr.forEach((value, i) => {
       if (value.bookmarkid === action.bookmark[0].bookmarkid) {
         index = i;
       }
@@ -39,7 +39,7 @@ var bookmarkReducer = function(state, action) {
   }
   case actionTypes.DELETE_BOOKMARK_SUCCESS: {
     let tempArr = state.slice();
-    tempArr.forEach(function(value, i) {
+    tempArr.forEach((value, i) => {
       if (value.bookmarkid === action.bookmark[0].bookmarkid) {
         index = i;
       }
@@ -59,13 +59,13 @@ var bookmarkReducer = function(state, action) {
   }
 };
 
-var folderReducer = function(state, action) {
+const folderReducer = (state, action) => {
   // This part of the state is an array
   state = state || [];
-  var index;
+  let index;
   switch (action.type) {
   case actionTypes.ADD_FOLDER_SUCCESS: {
-    var newState = state.slice();
+    let newState = state.slice();
     newState.push(action.folder);
     return newState;
   }
@@ -74,7 +74,7 @@ var folderReducer = function(state, action) {
   }
   case actionTypes.EDIT_FOLDER_SUCCESS: {
     let tempArr = state.slice();
-    tempArr.forEach(function(value, i) {
+    tempArr.forEach((value, i) => {
       if (value.folderid === action.folder[0].folderid) {
         index = i;
       }
@@ -84,7 +84,7 @@ var folderReducer = function(state, action) {
   }
   case actionTypes.DELETE_FOLDER_SUCCESS: {
     let tempArr = state.slice();
-    tempArr.forEach(function(value, i) {
+    tempArr.forEach((value, i) => {
       if (value.folderid === action.folder[0].folderid) {
         index = i;
       }
@@ -104,7 +104,7 @@ var folderReducer = function(state, action) {
   }
 };
 
-var tagReducer = function(state, action) {
+const tagReducer = (state, action) => {
   // This part of the state is an array
   state = state || [];
 
@@ -121,7 +121,7 @@ var tagReducer = function(state, action) {
   }
 };
 
-var rootReducer = combineReducers({
+const rootReducer = combineReducers({
   bookmarks: bookmarkReducer,
   folders: folderReducer,
   tags: tagReducer,

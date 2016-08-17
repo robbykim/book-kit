@@ -1,13 +1,13 @@
 import React from 'react';
 
-const SelectFolder = React.createClass({
-  render: function () {
+class SelectFolder extends React.Component {
+  render () {
     return (
       <option value={this.props.folder.folderid}>
         {this.props.folder.foldername}
       </option>
     );
   }
-});
+}
 
 module.exports = SelectFolder;

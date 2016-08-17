@@ -5,19 +5,24 @@ import BookmarkForm from '../content/bookmark-form';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-const Navbar = React.createClass({
-  onAddInput: function (event) {
+class Navbar extends React.Component {
+  constructor () {
+    super();
+    this.postFolder = this.postFolder.bind(this);
+    this.onAddInput = this.onAddInput.bind(this);
+  }
+  onAddInput (event) {
     let text = event.target.value;
     this.props.dispatch(actions.searchTextChange(text));
-  },
-  postFolder: function (event) {
+  }
+  postFolder (event) {
     event.preventDefault();
     this.props.dispatch(actions.addFolder(this.refs.newFolder.value));
     this.refs.newFolder.value = '';
-  },
-  render: function() {
+  }
+  render () {
     let folderArr = [];
-    this.props.folders.forEach(function(folder, index) {
+    this.props.folders.forEach((folder, index) => {
       folderArr.push(<Folder key={index} folder={folder}/>);
     });
 
@@ -64,9 +69,9 @@ const Navbar = React.createClass({
       </header>
     );
   }
-});
+}
 
-const mapStateToProps = function(state, props) {
+const mapStateToProps = (state, props) => {
   return {
     folders: state.folders,
   };

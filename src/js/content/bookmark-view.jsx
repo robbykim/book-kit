@@ -3,9 +3,8 @@ import ConfirmDelete from './bookmark-confirm-delete';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-// COMPONENT: Displays detailed information for a selected bookmark
-const BookmarkView = React.createClass({
-  render: function () {
+class BookmarkView extends React.Component {
+  render () {
     if (this.props.bookmarks.length === 0) {
       return null;
     }
@@ -44,10 +43,10 @@ const BookmarkView = React.createClass({
       </section>
     );
   }
-});
+}
 
 // Grabs the bookmarks state from the store
-const mapStateToProps = function (state, props) {
+const mapStateToProps = (state) => {
   return {
     bookmarks: state.bookmarks
   };

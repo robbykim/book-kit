@@ -3,12 +3,12 @@ import Nav from './nav/nav-header';
 import actions from './redux/actions';
 import { connect } from 'react-redux';
 
-const PageContainer = React.createClass({
-  componentDidMount: function () {
+class PageContainer extends React.Component {
+  componentDidMount () {
     this.props.dispatch(actions.getBookmarks());
     this.props.dispatch(actions.getFolders());
-  },
-  render: function() {
+  }
+  render () {
     return (
       <div>
         <Nav/>
@@ -18,7 +18,7 @@ const PageContainer = React.createClass({
       </div>
     );
   }
-});
+}
 
 const Container = connect()(PageContainer);
 

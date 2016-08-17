@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-// COMPONENT: Displays the individual Tiles of bookmarks on the main page
-const Tile = React.createClass({
-  render: function () {
+class Tile extends React.Component {
+  render () {
     var style = {
       backgroundImage: 'url(' + this.props.screenshot + ')'
     };
@@ -21,6 +20,6 @@ const Tile = React.createClass({
       </Link>
     );
   }
-});
+}
 
 module.exports = Tile;

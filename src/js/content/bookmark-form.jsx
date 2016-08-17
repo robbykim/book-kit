@@ -3,8 +3,12 @@ import actions from '../redux/actions';
 import Folder from './bookmark-form-folder';
 import { connect } from 'react-redux';
 
-const BookmarkForm = React.createClass({
-  addBookmark: function () {
+class BookmarkForm extends React.Component {
+  constructor () {
+    super();
+    this.addBookmark = this.addBookmark.bind(this);
+  }
+  addBookmark () {
     this.props.dispatch(actions.addBookmark({
       url: this.refs.url.value,
       title: this.refs.title.value,
@@ -18,8 +22,8 @@ const BookmarkForm = React.createClass({
     this.refs.description.value = '';
     this.refs.folder.value = '';
     this.refs.screenshot.value = '';
-  },
-  render: function () {
+  }
+  render () {
     let folderArr = [];
     this.props.folders.forEach(function(folder, index) {
       folderArr.push(<Folder key={index} folder={folder}/>);
@@ -33,15 +37,15 @@ const BookmarkForm = React.createClass({
           <div className="modal-body">
             <form onSubmit={this.addBookmark} className="form-horizontal">
               <div className="form-group">
-                <label htmlFor="form-title" className="col-sm-2 control-label">Title</label>
+                <label htmlFor="form-title" className="col-sm-2 control-label">Title *</label>
                 <div className="col-sm-10">
-                  <input type="text" ref="title" className="form-control" id="form-title" />
+                  <input type="text" ref="title" className="form-control" id="form-title" required />
                 </div>
               </div>
               <div className="form-group">
-                <label htmlFor="form-url" className="col-sm-2 control-label">URL</label>
+                <label htmlFor="form-url" className="col-sm-2 control-label">URL *</label>
                 <div className="col-sm-10">
-                  <input type="text" ref="url" className="form-control" id="form-url" />
+                  <input type="text" ref="url" className="form-control" id="form-url" required />
                 </div>
               </div>
               <div className="form-group">
@@ -57,9 +61,9 @@ const BookmarkForm = React.createClass({
                 </div>
               </div>
               <div className="form-group">
-                <label htmlFor="form-folder" className="col-sm-2 control-label">Folder</label>
+                <label htmlFor="form-folder" className="col-sm-2 control-label">Folder *</label>
                 <div className="col-sm-10">
-                  <select ref="folder" className="selectpicker form-control" id="form-folder">
+                  <select ref="folder" className="selectpicker form-control" id="form-folder" required >
                     {folderArr}
                   </select>
                 </div>
@@ -78,11 +82,11 @@ const BookmarkForm = React.createClass({
       </div>
     );
   }
-});
+}
 
-const mapStateToProps = function(state, props) {
+const mapStateToProps = (state) => {
   return {
-    folders: state.folders,
+    folders: state.folders
   };
 };
 

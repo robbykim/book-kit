@@ -2,9 +2,8 @@ import React from 'react';
 import Tile from './bookmark-child-tile';
 import { connect } from 'react-redux';
 
-// COMPONENT: Displays the collection of tiles on the main page
-const BookmarkTiles = React.createClass({
-  render: function () {
+class BookmarkTiles extends React.Component {
+  render () {
     let tileArr = [];
 
     if (this.props.params.folderName) {
@@ -60,9 +59,9 @@ const BookmarkTiles = React.createClass({
       </section>
     );
   }
-});
+}
 
-const mapStateToProps = function(state, props) {
+const mapStateToProps = (state) => {
   return {
     bookmarks: state.bookmarks,
     search: state.search

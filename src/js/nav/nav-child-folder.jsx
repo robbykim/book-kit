@@ -3,19 +3,22 @@ import actions from '../redux/actions';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-const Folder = React.createClass({
-  onDelete: function (id) {
+class Folder extends React.Component {
+  constructor () {
+    super();
+    this.onEdit = this.onEdit.bind(this);
+  }
+  onDelete (id) {
     this.props.dispatch(actions.deleteFolder(id));
-  },
-  onEdit: function (event) {
+  }
+  onEdit (event) {
     event.preventDefault();
     console.log(this.refs.editedFolder.value);
-    // this.props.onShowEdit;
-    // TODO: enable show state when submitted
-  },
-  render: function () {
-    var textStyle = this.props.show ? { display: 'none' } : {};
-    var inputStyle = this.props.show ? {} : { display: 'none' };
+    this.props.onShowEdit();
+  }
+  render () {
+    let textStyle = this.props.show ? { display: 'none' } : {};
+    let inputStyle = this.props.show ? {} : { display: 'none' };
     return (
       <li>
         <Link to={'/folders/' + this.props.folder.foldername} style={textStyle}>
@@ -29,7 +32,7 @@ const Folder = React.createClass({
       </li>
     );
   }
-});
+}
 
 const Container = connect()(Folder);
 

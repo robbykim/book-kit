@@ -3,11 +3,15 @@ import actions from '../redux/actions';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-const ConfirmDelete = React.createClass({
-  onDelete: function (id) {
+class ConfirmDelete extends React.Component {
+  constructor () {
+    super();
+    this.onDelete = this.onDelete.bind(this);
+  }
+  onDelete (id) {
     this.props.dispatch(actions.deleteBookmark(id));
-  },
-  render: function () {
+  }
+  render () {
     return (
       <div className="modal-dialog">
         <div className="modal-content">
@@ -26,7 +30,7 @@ const ConfirmDelete = React.createClass({
       </div>
     );
   }
-});
+}
 
 const Container = connect()(ConfirmDelete);
 
