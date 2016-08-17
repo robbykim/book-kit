@@ -11,9 +11,9 @@ class Folder extends React.Component {
   onDelete (id) {
     this.props.dispatch(actions.deleteFolder(id));
   }
-  onEdit (event) {
+  onEdit (id, folderName, event) {
     event.preventDefault();
-    console.log(this.refs.editedFolder.value);
+    this.props.dispatch(actions.editFolder(id, folderName));
     this.props.onShowEdit();
   }
   render () {
@@ -24,7 +24,7 @@ class Folder extends React.Component {
         <Link to={'/folders/' + this.props.folder.foldername} style={textStyle}>
           {this.props.folder.foldername}
         </Link>
-        <form onSubmit={this.onEdit} style={inputStyle}>
+        <form onSubmit={() => this.onEdit(this.props.folder.folderid, this.refs.editedFolder.value, event)} style={inputStyle}>
           <input type="text" ref="editedFolder" defaultValue={this.props.folder.foldername}/>
         </form>
         <span onClick={this.props.onShowEdit} className="glyphicon glyphicon-pencil" aria-hidden="true"></span>

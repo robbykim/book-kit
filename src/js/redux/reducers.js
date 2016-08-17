@@ -75,11 +75,11 @@ const folderReducer = (state, action) => {
   case actionTypes.EDIT_FOLDER_SUCCESS: {
     let tempArr = state.slice();
     tempArr.forEach((value, i) => {
-      if (value.folderid === action.folder[0].folderid) {
+      if (value.folderid === action.folder.folderid) {
         index = i;
       }
     });
-    tempArr[index] = action.folder[0];
+    tempArr[index] = action.folder;
     return tempArr;
   }
   case actionTypes.DELETE_FOLDER_SUCCESS: {

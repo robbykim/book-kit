@@ -268,17 +268,21 @@ const editFolderError = (error) => {
   };
 };
 
-const editFolder = (editedFolder) => {
+const editFolder = (folderId, folderName) => {
   return (dispatch) => {
+    let folder = {
+      folderid: folderId,
+      foldername: folderName
+    }
     let init = {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(editedFolder)
+      body: JSON.stringify(folder)
     };
-    let url = 'http://localhost:5000/folders/' + editedFolder.folderid;
+    let url = 'http://localhost:5000/folders/' + folderId;
     fetch(url, init).then((res) => {
       if (res.status < 200 || res.status >= 300) {
         let error = new Error(res.statusText);
