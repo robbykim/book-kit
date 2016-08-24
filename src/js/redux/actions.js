@@ -1,46 +1,47 @@
-import actionTypes from './constants';
 import fetch from 'isomorphic-fetch';
+import actionTypes from './constants';
 
 // URL for heroku: https://shrouded-journey-65738.herokuapp.com/
 // URL for localhost: https://localhost:5000
 
 /* Redux Action Creators */
 
-const searchTextChange = (text) => {
+function searchTextChange(text) {
   return {
+    text,
     type: actionTypes.SEARCH_TEXT_CHANGE,
-    text: text
   };
-};
+}
 
 /* BOOKMARK ACTIONS */
 // Get Requests
-const getBookmarksSuccess = (bookmarks) => {
+function getBookmarksSuccess(bookmarks) {
   return {
+    bookmarks,
     type: actionTypes.GET_BOOKMARKS_SUCCESS,
-    bookmarks: bookmarks
   };
-};
+}
 
-const getBookmarksError = (error) => {
+function getBookmarksError(error) {
   return {
+    error,
     type: actionTypes.GET_BOOKMARKS_ERROR,
-    error: error
   };
-};
+}
 
-const getBookmarks = () => {
+function getBookmarks() {
   return (dispatch) => {
-    let url = 'http://localhost:5000/bookmarks';
+    const url = 'http://localhost:5000/bookmarks';
     return fetch(url).then((res) => {
       if (res.status < 200 || res.status >= 300) {
-        let error = new Error(res.statusText);
+        const error = new Error(res.statusText);
         error.response = res;
         throw error;
       }
+
       return res.json();
     }).then((bookmarks) => {
-      return dispatch (
+      return dispatch(
         getBookmarksSuccess(bookmarks)
       );
     }).catch((error) => {
@@ -49,39 +50,41 @@ const getBookmarks = () => {
       );
     });
   };
-};
+}
 // Post Requests
-const addBookmarkSuccess = (newBookmark) => {
+function addBookmarkSuccess(newBookmark) {
   return {
     type: actionTypes.ADD_BOOKMARK_SUCCESS,
-    bookmark: newBookmark
+    bookmark: newBookmark,
   };
-};
+}
 
-const addBookmarkError = (error) => {
+function addBookmarkError(error) {
   return {
+    error,
     type: actionTypes.ADD_BOOKMARK_ERROR,
-    error: error
   };
-};
+}
 
-const addBookmark = (newBookmark) => {
+function addBookmark(newBookmark) {
   return (dispatch) => {
-    let init = {
+    const init = {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(newBookmark)
+      body: JSON.stringify(newBookmark),
     };
-    let url = 'http://localhost:5000/bookmarks';
+
+    const url = 'http://localhost:5000/bookmarks';
     fetch(url, init).then((res) => {
       if (res.status < 200 || res.status >= 300) {
-        let error = new Error(res.statusText);
+        const error = new Error(res.statusText);
         error.reponse = res;
         throw error;
       }
+
       return res.json();
     }).then((bookmark) => {
       return dispatch(addBookmarkSuccess(bookmark));
@@ -89,80 +92,84 @@ const addBookmark = (newBookmark) => {
       return dispatch(addBookmarkError(error));
     });
   };
-};
+}
 
 // Put Requests
-const editBookmarkSuccess = (editedBookmark) => {
+function editBookmarkSuccess(editedBookmark) {
   return {
     type: actionTypes.EDIT_BOOKMARK_SUCCESS,
-    bookmark: editedBookmark
+    bookmark: editedBookmark,
   };
-};
+}
 
-const editBookmarkError = (error) => {
+function editBookmarkError(error) {
   return {
+    error,
     type: actionTypes.EDIT_BOOKMARK_ERROR,
-    error: error
   };
-};
+}
 
-const editBookmark = (editedBookmark) => {
+function editBookmark(editedBookmark) {
   return (dispatch) => {
-    let init = {
+    const init = {
       method: 'PUT',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(editedBookmark)
+      body: JSON.stringify(editedBookmark),
     };
-    let url = 'http://localhost:5000/bookmarks/' + editedBookmark.bookmarkid;
+
+    const url = `http://localhost:5000/bookmarks/${editedBookmark.bookmarkid}`;
     fetch(url, init).then((res) => {
       if (res.status < 200 || res.status >= 300) {
-        let error = new Error(res.statusText);
+        const error = new Error(res.statusText);
         error.response = res;
         throw error;
       }
+
       return res.json();
-    }).then((editedBookmark) => {
-      return dispatch(editBookmarkSuccess(editedBookmark));
+    }).then((bookmark) => {
+      return dispatch(editBookmarkSuccess(bookmark));
     }).catch((err) => {
       return dispatch(editBookmarkError(err));
     });
   };
-};
+}
 
 // Delete Requests
-const deleteBookmarkSuccess = (deletedBookmark) => {
+function deleteBookmarkSuccess(deletedBookmark) {
   return {
     type: actionTypes.DELETE_BOOKMARK_SUCCESS,
-    bookmark: deletedBookmark
+    bookmark: deletedBookmark,
   };
-};
+}
 
-const deleteBookmarkError = (error) => {
+function deleteBookmarkError(error) {
   return {
+    error,
     type: actionTypes.DELETE_BOOKMARK_ERROR,
-    error: error
   };
-};
+}
 
-const deleteBookmark = (bookmarkid) => {
+function deleteBookmark(bookmarkid) {
   return (dispatch) => {
-    let init = {
+    const init = {
       method: 'DELETE',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
     };
-    let url = 'http://localhost:5000/bookmarks/' + bookmarkid;
+
+    const url = `http://localhost:5000/bookmarks/${bookmarkid}`;
     fetch(url, init).then((res) => {
       if (res.status < 200 || res.status >= 300) {
-        let error = new Error(res.statusText);
+        const error = new Error(res.statusText);
         error.response = res;
         throw error;
       }
+
       return res.json();
     }).then((bookmark) => {
       return dispatch(deleteBookmarkSuccess(bookmark));
@@ -170,36 +177,37 @@ const deleteBookmark = (bookmarkid) => {
       return dispatch(deleteBookmarkError(error));
     });
   };
-};
+}
 
 /* FOLDER ACTIONS */
 // Get Requests
-const getFoldersSuccess = (folders) => {
+function getFoldersSuccess(folders) {
   return {
+    folders,
     type: actionTypes.GET_FOLDERS_SUCCESS,
-    folders: folders
   };
-};
+}
 
-const getFoldersError = (error) => {
+function getFoldersError(error) {
   return {
+    error,
     type: actionTypes.GET_FOLDERS_ERROR,
-    error: error
   };
-};
+}
 
-const getFolders = () => {
+function getFolders() {
   return (dispatch) => {
-    let url = 'http://localhost:5000/folders';
+    const url = 'http://localhost:5000/folders';
     return fetch(url).then((res) => {
       if (res.status < 200 || res.status >= 300) {
-        let error = new Error(res.statusText);
+        const error = new Error(res.statusText);
         error.response = res;
         throw error;
       }
+
       return res.json();
     }).then((folders) => {
-      return dispatch (
+      return dispatch(
         getFoldersSuccess(folders)
       );
     }).catch((error) => {
@@ -208,39 +216,39 @@ const getFolders = () => {
       );
     });
   };
-};
+}
 
 // Post Requests
-const addFolderSuccess = (newFolderName) => {
+function addFolderSuccess(newFolderName) {
   return {
     type: actionTypes.ADD_FOLDER_SUCCESS,
-    folder: newFolderName
+    folder: newFolderName,
   };
-};
+}
 
-const addFolderError = (error) => {
+function addFolderError(error) {
   return {
+    error,
     type: actionTypes.ADD_FOLDER_ERROR,
-    error: error
   };
-};
+}
 
-const addFolder = (newFolder) => {
+function addFolder(newFolder) {
   return (dispatch) => {
-    let init = {
+    const init = {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        foldername: newFolder
-      })
+        foldername: newFolder,
+      }),
     };
-    let url = 'http://localhost:5000/folders';
+    const url = 'http://localhost:5000/folders';
     fetch(url, init).then((res) => {
       if (res.status < 200 || res.status >= 300) {
-        let error = new Error(res.statusText);
+        const error = new Error(res.statusText);
         error.response = res;
         throw error;
       }
@@ -251,44 +259,46 @@ const addFolder = (newFolder) => {
       return dispatch(addFolderError(error));
     });
   };
-};
+}
 
 // Put Requests
-const editFolderSuccess = (editedFolder) => {
+function editFolderSuccess(editedFolder) {
   return {
     type: actionTypes.EDIT_FOLDER_SUCCESS,
-    folder: editedFolder
+    folder: editedFolder,
   };
-};
+}
 
-const editFolderError = (error) => {
+function editFolderError(error) {
   return {
+    error,
     type: actionTypes.EDIT_FOLDER_ERROR,
-    folder: error
   };
-};
+}
 
-const editFolder = (folderId, folderName) => {
+function editFolder(folderId, folderName) {
   return (dispatch) => {
-    let folder = {
+    const folder = {
       folderid: folderId,
-      foldername: folderName
-    }
-    let init = {
+      foldername: folderName,
+    };
+
+    const init = {
       method: 'PUT',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(folder)
+      body: JSON.stringify(folder),
     };
-    let url = 'http://localhost:5000/folders/' + folderId;
+    const url = `http://localhost:5000/folders/${folderId}`;
     fetch(url, init).then((res) => {
       if (res.status < 200 || res.status >= 300) {
-        let error = new Error(res.statusText);
+        const error = new Error(res.statusText);
         error.response = res;
         throw error;
       }
+
       return res.json();
     }).then((editedFolder) => {
       dispatch(editFolderSuccess(editedFolder));
@@ -296,40 +306,41 @@ const editFolder = (folderId, folderName) => {
       dispatch(editFolderError(error));
     });
   };
-};
-
+}
 
 // Delete Requests
-const deleteFolderSuccess = (deletedFolder) => {
+function deleteFolderSuccess(deletedFolder) {
   return {
     type: actionTypes.DELETE_FOLDER_SUCCESS,
-    folder: deletedFolder
+    folder: deletedFolder,
   };
-};
+}
 
-const deleteFolderError = (error) => {
+function deleteFolderError(error) {
   return {
+    error,
     type: actionTypes.DELETE_FOLDER_ERROR,
-    error: error
   };
-};
+}
 
-const deleteFolder = (folderid) => {
+function deleteFolder(folderid) {
   return (dispatch) => {
-    let init = {
+    const init = {
       method: 'DELETE',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
     };
-    let url = 'http://localhost:5000/folders/' + folderid;
+
+    const url = `http://localhost:5000/folders/${folderid}`;
     fetch(url, init).then((res) => {
       if (res.status < 200 || res.status >= 300) {
-        let error = new Error(res.statusText);
+        const error = new Error(res.statusText);
         error.response = res;
         throw error;
       }
+
       return res.json();
     }).then((folder) => {
       return dispatch(deleteFolderSuccess(folder));
@@ -337,30 +348,30 @@ const deleteFolder = (folderid) => {
       return dispatch(deleteFolderError(error));
     });
   };
-};
+}
 
 /* TAGS ACTIONS */
 // Get Requests
 
-const getTagsSuccess = (tags) => {
+function getTagsSuccess(tags) {
   return {
+    tags,
     type: actionTypes.GET_TAGS_SUCCESS,
-    tags: tags
   };
-};
+}
 
-const getTagsError = (error) => {
+function getTagsError(error) {
   return {
+    error,
     type: actionTypes.GET_TAGS_ERROR,
-    error: error
   };
-};
+}
 
-const getTags = () => {
+function getTags() {
   // return function(dispatch) {
     // return dispatch(getTagsSuccess(storage.tags));
   // };
-};
+}
 
 exports.searchTextChange = searchTextChange;
 exports.addBookmark = addBookmark;

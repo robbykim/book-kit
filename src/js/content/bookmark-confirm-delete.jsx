@@ -1,17 +1,19 @@
-import React from 'react';
-import actions from '../redux/actions';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import React from 'react';
+import actions from '../redux/actions';
 
 class ConfirmDelete extends React.Component {
-  constructor () {
+  constructor() {
     super();
     this.onDelete = this.onDelete.bind(this);
   }
-  onDelete (id) {
+
+  onDelete(id) {
     this.props.dispatch(actions.deleteBookmark(id));
   }
-  render () {
+
+  render() {
     return (
       <div className="modal-dialog">
         <div className="modal-content">

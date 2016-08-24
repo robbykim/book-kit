@@ -1,20 +1,22 @@
-import BookmarkView from './bookmark-view';
 import React from 'react';
+import BookmarkView from './bookmark-view';
 
 class BookmarkViewContainer extends React.Component {
-  constructor () {
+  constructor() {
     super();
     this.onShowEdit = this.onShowEdit.bind(this);
     this.state = {
-      show: false
+      show: false,
     };
   }
-  onShowEdit () {
+
+  onShowEdit() {
     this.setState({
-      show: !this.state.show
+      show: !this.state.show,
     });
   }
-  render () {
+
+  render() {
     const id = this.props.params.bookmarkId;
     return (
       <BookmarkView onShowEdit={this.onShowEdit} show={this.state.show} id={id} />

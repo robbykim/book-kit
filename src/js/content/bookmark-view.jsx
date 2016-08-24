@@ -1,23 +1,43 @@
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import React from 'react';
 import ConfirmDelete from './bookmark-confirm-delete';
 import Folder from './bookmark-form-folder';
-import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import actions from '../redux/actions';
 
 class BookmarkView extends React.Component {
-  render () {
+  constructor() {
+    super();
+    this.onEdit = this.onEdit.bind(this);
+  }
+
+  onEdit() {
+    this.props.dispatch(actions.editBookmark({
+      url: this.refs.url.value,
+      title: this.refs.title.value,
+      description: this.refs.description.value,
+      folderid: this.refs.folder.value,
+      screenshot: this.refs.screenshot.value,
+      bookmarkid: this.props.bookmarks[0].bookmarkid,
+    }));
+
+    this.props.onShowEdit();
+  }
+
+  render() {
     if (this.props.bookmarks.length === 0) {
       return null;
     }
+    
     const id = this.props.id;
     // filters through the bookmarks by the selected id
-    let bookmark = this.props.bookmarks.filter(function(bookmark) {
-      return id === bookmark.bookmarkid.toString();
-    });
+    const bookmark = this.props.bookmarks.filter((bkmark) =>
+      id === bkmark.bookmarkid.toString()
+    );
 
     let folderArr = [];
-    this.props.folders.forEach(function(folder, index) {
-      folderArr.push(<Folder key={index} folder={folder}/>);
+    this.props.folders.forEach((folder, index) => {
+      folderArr.push(<Folder key={index} folder={folder} />);
     });
 
     let textStyle = this.props.show ? { display: 'none' } : {};
@@ -33,18 +53,18 @@ class BookmarkView extends React.Component {
           <p>{bookmark[0].foldername}</p>
         </div>
         <div className="col-md-6" style={textStyle}>
-          <img src={bookmark[0].screenshot} alt="placeholder-image" className="img-rounded" width="400"/>
+          <img src={bookmark[0].screenshot} alt="placeholder" className="img-rounded" width="400" />
         </div>
         <div className="col-md-12" style={inputStyle}>
-          <form>
+          <form onSubmit={this.onEdit}>
             <h4>Title *</h4>
-            <input type="text" className="form-control" defaultValue={bookmark[0].title} placeholder="Title *" required />
+            <input type="text" className="form-control" ref="title" defaultValue={bookmark[0].title} placeholder="Title *" required />
             <h4>URL *</h4>
-            <input type="text" className="form-control" defaultValue={bookmark[0].url} placeholder="URL *" required/>
+            <input type="text" className="form-control" ref="url" defaultValue={bookmark[0].url} placeholder="URL *" required />
             <h4>Description</h4>
-            <input type="text" className="form-control" defaultValue={bookmark[0].description} placeholder="Description" />
+            <input type="text" className="form-control" ref="description" defaultValue={bookmark[0].description} placeholder="Description" />
             <h4>Screenshot URL</h4>
-            <input type="text" className="form-control" defaultValue={bookmark[0].screenshot} placeholder="Screenshot URL" />
+            <input type="text" className="form-control" ref="screenshot" defaultValue={bookmark[0].screenshot} placeholder="Screenshot URL" />
             <h4>Folder *</h4>
             <select ref="folder" className="selectpicker form-control" id="form-folder" required >
               {folderArr}
@@ -61,7 +81,7 @@ class BookmarkView extends React.Component {
           </a>
 
           <div className="modal fade" id="delete-bookmark">
-            <ConfirmDelete bookmarkId={bookmark[0].bookmarkid}/>
+            <ConfirmDelete bookmarkId={bookmark[0].bookmarkid} />
           </div>
 
           <Link to={'/'} style={textStyle}>
@@ -77,7 +97,7 @@ class BookmarkView extends React.Component {
 const mapStateToProps = (state) => {
   return {
     bookmarks: state.bookmarks,
-    folders: state.folders
+    folders: state.folders,
   };
 };
 
