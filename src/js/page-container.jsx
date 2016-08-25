@@ -1,17 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Nav from './nav/nav-header';
 import actions from './redux/actions';
-import { connect } from 'react-redux';
 
 class PageContainer extends React.Component {
-  componentDidMount () {
+  componentDidMount() {
     this.props.dispatch(actions.getBookmarks());
     this.props.dispatch(actions.getFolders());
   }
-  render () {
+
+  render() {
     return (
       <div>
-        <Nav/>
+        <Nav />
         <section className="main-section container">
           {this.props.children}
         </section>

@@ -23,9 +23,22 @@ class ConfirmDelete extends React.Component {
           <div className="modal-footer">
             <div>
               <Link to={'/'}>
-                <button type="button" className="btn btn-default" onClick={() => this.onDelete(this.props.bookmarkId)} data-dismiss="modal">Yes</button>
+                <button
+                  type="button"
+                  className="btn btn-default"
+                  onClick={() => { this.onDelete(this.props.bookmarkId); }}
+                  data-dismiss="modal"
+                >
+                  Yes
+                </button>
               </Link>
-              <button type="button" className="btn btn-default" data-dismiss="modal">No</button>
+              <button
+                type="button"
+                className="btn btn-default"
+                data-dismiss="modal"
+              >
+                No
+              </button>
             </div>
           </div>
         </div>

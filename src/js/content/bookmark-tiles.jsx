@@ -5,12 +5,14 @@ import Tile from './bookmark-child-tile';
 class BookmarkTiles extends React.Component {
   render() {
     let tileArr = [];
-
+    // FIXME: need to make it so we're routing to folderid and not name
+    // folders with spaces show up with space in url which is bad
+    // nav-child-folder and routes - folderId is not stored with bookmarks
     if (this.props.params.folderName) {
       const folder = this.props.params.folderName;
-      const tempArr = this.props.bookmarks.filter((bookmark) =>
-        folder === bookmark.foldername
-      );
+      const tempArr = this.props.bookmarks.filter((bookmark) => {
+        return folder === bookmark.foldername;
+      });
 
       tempArr.forEach((bookmark) => {
         tileArr.push(<Tile

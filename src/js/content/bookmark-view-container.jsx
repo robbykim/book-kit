@@ -19,7 +19,11 @@ class BookmarkViewContainer extends React.Component {
   render() {
     const id = this.props.params.bookmarkId;
     return (
-      <BookmarkView onShowEdit={this.onShowEdit} show={this.state.show} id={id} />
+      <BookmarkView
+        onShowEdit={this.onShowEdit}
+        show={this.state.show}
+        id={id}
+      />
     );
   }
 }

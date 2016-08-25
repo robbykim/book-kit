@@ -19,8 +19,8 @@ class Navbar extends React.Component {
 
   postFolder(event) {
     event.preventDefault();
-    this.props.dispatch(actions.addFolder(this.refs.newFolder.value));
-    this.refs.newFolder.value = '';
+    this.props.dispatch(actions.addFolder(this.newFolder.value));
+    this.newFolder.value = '';
   }
 
   render() {
@@ -51,16 +51,32 @@ class Navbar extends React.Component {
             </ul>
             <form className="navbar-form navbar-right">
               <div className="form-group">
-                <input type="text" onChange={this.onAddInput} placeholder="Search..." className="search-bar form-control" />
+                <input
+                  type="text"
+                  onChange={this.onAddInput}
+                  placeholder="Search..."
+                  className="search-bar form-control"
+                />
               </div>
             </form>
             <ul className="nav navbar-nav navbar-right">
               <li className="dropdown">
-                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Folders <span className="caret" /></a>
+                <a
+                  className="dropdown-toggle"
+                  data-toggle="dropdown"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >Folders <span className="caret" /></a>
                 <ul className="dropdown-menu">
                   <li>
                     <form onSubmit={this.postFolder}>
-                      <input className="form-control" placeholder="Add Folder" type="text" ref="newFolder" />
+                      <input
+                        className="form-control"
+                        placeholder="Add Folder"
+                        type="text"
+                        ref={newFolder => { this.newFolder = newFolder; }}
+                      />
                     </form>
                   </li>
                   {folderArr}

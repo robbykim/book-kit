@@ -9,13 +9,21 @@ class FolderContainer extends React.Component {
       show: false,
     };
   }
+
   onShowEdit() {
     this.setState({
       show: !this.state.show,
     });
   }
+
   render() {
-    return <FolderNav show={this.state.show} onShowEdit={this.onShowEdit} folder={this.props.folder} />;
+    return (
+      <FolderNav
+        show={this.state.show}
+        onShowEdit={this.onShowEdit}
+        folder={this.props.folder}
+      />
+    );
   }
 }
 

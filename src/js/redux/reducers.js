@@ -1,8 +1,7 @@
 import { combineReducers } from 'redux';
 import actionTypes from './constants';
 
-function searchReducer(state, action) {
-  state = state || '';
+function searchReducer(state = '', action) {
   switch (action.type) {
     case actionTypes.SEARCH_TEXT_CHANGE: {
       return action.text;
@@ -14,8 +13,7 @@ function searchReducer(state, action) {
   }
 }
 
-function bookmarkReducer(state, action) {
-  state = state || [];
+function bookmarkReducer(state = [], action) {
   let index;
 
   switch (action.type) {
@@ -66,9 +64,8 @@ function bookmarkReducer(state, action) {
   }
 }
 
-function folderReducer(state, action) {
+function folderReducer(state = [], action) {
   // This part of the state is an array
-  state = state || [];
   let index;
   switch (action.type) {
     case actionTypes.ADD_FOLDER_SUCCESS: {
@@ -118,10 +115,8 @@ function folderReducer(state, action) {
   }
 }
 
-function tagReducer(state, action) {
+function tagReducer(state = [], action) {
   // This part of the state is an array
-  state = state || [];
-
   switch (action.type) {
     case actionTypes.GET_TAGS_SUCCESS: {
       return action.tags;
