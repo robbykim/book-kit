@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import React from 'react';
-import ConfirmDelete from './bookmark-confirm-delete';
 import Folder from './bookmark-form-folder';
 import actions from '../redux/actions';
 
@@ -9,6 +8,7 @@ class BookmarkView extends React.Component {
   constructor() {
     super();
     this.onEdit = this.onEdit.bind(this);
+    this.onDelete = this.onDelete.bind(this);
   }
 
   onEdit() {
@@ -24,8 +24,9 @@ class BookmarkView extends React.Component {
     this.props.onShowEdit();
   }
 
-  onDelete() {
-
+  onDelete(id) {
+    this.props.dispatch(actions.deleteBookmark(id));
+    this.props.onShowDelete();
   }
 
   render() {
@@ -46,6 +47,8 @@ class BookmarkView extends React.Component {
 
     let textStyle = this.props.show ? { display: 'none' } : {};
     let inputStyle = this.props.show ? {} : { display: 'none' };
+    let textDeleteStyle = this.props.delete ? { display: 'none' } : {};
+    let deleteStyle = this.props.delete ? {} : { display: 'none' };
 
     return (
       <section className="bookmark-section">
@@ -130,15 +133,21 @@ class BookmarkView extends React.Component {
           >
             Cancel
           </button>
-
-          <a data-toggle="modal" data-target="#delete-bookmark" style={textStyle}>
-            <button className="btn btn-default">Delete</button>
-          </a>
-
-          <div className="modal fade" id="delete-bookmark">
-            <ConfirmDelete bookmarkId={bookmark[0].bookmarkid} />
-          </div>
-
+          <button
+            className="btn btn-default"
+            style={textDeleteStyle}
+            onClick={this.props.onShowDelete}
+          >
+            Delete
+          </button>
+          <Link to={'/'} style={deleteStyle}>
+            <button
+              className="btn btn-default"
+              onClick={() => { this.onDelete(bookmark[0].bookmarkid); }}
+            >
+              Confirm
+            </button>
+          </Link>
           <Link to={'/'} style={textStyle}>
             <button className="btn btn-default">Close</button>
           </Link>
