@@ -67,7 +67,8 @@ class Navbar extends React.Component {
                   role="button"
                   aria-haspopup="true"
                   aria-expanded="false"
-                >Folders <span className="caret" /></a>
+                >Folders <span className="caret" />
+                </a>
                 <ul className="dropdown-menu">
                   <li>
                     <form onSubmit={this.postFolder}>

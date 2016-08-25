@@ -112,8 +112,7 @@ class BookmarkView extends React.Component {
               ref={folder => { this.folder = folder; }}
               id="form-folder"
               required
-            >
-              {folderArr}
+            >{folderArr}
             </select>
             <button type="submit" className="btn btn-default">Submit</button>
           </form>
@@ -123,29 +122,25 @@ class BookmarkView extends React.Component {
             className="btn btn-default"
             style={textStyle}
             onClick={this.props.onShowEdit}
-          >
-            Edit
+          >Edit
           </button>
           <button
             className="btn btn-default"
             style={inputStyle}
             onClick={this.props.onShowEdit}
-          >
-            Cancel
+          >Cancel
           </button>
           <button
             className="btn btn-default"
             style={textDeleteStyle}
             onClick={this.props.onShowDelete}
-          >
-            Delete
+          >Delete
           </button>
           <Link to={'/'} style={deleteStyle}>
             <button
               className="btn btn-default"
               onClick={() => { this.onDelete(bookmark[0].bookmarkid); }}
-            >
-              Confirm
+            >Confirm
             </button>
           </Link>
           <Link to={'/'} style={textStyle}>

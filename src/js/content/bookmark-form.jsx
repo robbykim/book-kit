@@ -67,8 +67,7 @@ class BookmarkForm extends React.Component {
                 <label
                   htmlFor="form-description"
                   className="col-sm-2 control-label"
-                >
-                  Description
+                >Description
                 </label>
                 <div className="col-sm-10">
                   <input
@@ -83,8 +82,7 @@ class BookmarkForm extends React.Component {
                 <label
                   htmlFor="form-screenshot"
                   className="col-sm-2 control-label"
-                >
-                  Screenshot URL
+                >Screenshot URL
                 </label>
                 <div className="col-sm-10">
                   <input
@@ -99,8 +97,7 @@ class BookmarkForm extends React.Component {
                 <label
                   htmlFor="form-folder"
                   className="col-sm-2 control-label"
-                >
-                  Folder *
+                >Folder *
                 </label>
                 <div className="col-sm-10">
                   <select
@@ -108,8 +105,7 @@ class BookmarkForm extends React.Component {
                     className="selectpicker form-control"
                     id="form-folder"
                     required
-                  >
-                    {folderArr}
+                  >{folderArr}
                   </select>
                 </div>
               </div>
@@ -130,8 +126,7 @@ class BookmarkForm extends React.Component {
               type="button"
               className="btn btn-default"
               data-dismiss="modal"
-            >
-              Close
+            >Close
             </button>
           </div>
         </div>
