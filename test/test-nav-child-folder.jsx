@@ -27,5 +27,7 @@ describe('Nav Child Folder', () => {
         />
       </Provider>
     );
+
+    const result = renderer.getRenderOutput();
   });
 });
