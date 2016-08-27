@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Nav from './nav/nav-header';
+import Nav from './nav/nav-header-container';
 import actions from './redux/actions';
 
 class PageContainer extends React.Component {

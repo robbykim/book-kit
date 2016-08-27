@@ -1,25 +1,17 @@
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
 import React from 'react';
-import actions from '../redux/actions';
+import { Link } from 'react-router';
 import Folder from './nav-folder-container';
 import BookmarkFormContainer from '../content/bookmark-form-container';
 
 class Navbar extends React.Component {
   constructor() {
     super();
-    this.postFolder = this.postFolder.bind(this);
-    this.onAddInput = this.onAddInput.bind(this);
+    this.onAddFolder = this.onAddFolder.bind(this);
   }
 
-  onAddInput(event) {
-    const text = event.target.value;
-    this.props.dispatch(actions.searchTextChange(text));
-  }
-
-  postFolder(event) {
+  onAddFolder(event) {
     event.preventDefault();
-    this.props.dispatch(actions.addFolder(this.newFolder.value));
+    this.props.addFolder(this.newFolder.value);
     this.newFolder.value = '';
   }
 
@@ -53,7 +45,7 @@ class Navbar extends React.Component {
               <div className="form-group">
                 <input
                   type="text"
-                  onChange={this.onAddInput}
+                  onChange={this.props.onAddInput}
                   placeholder="Search..."
                   className="search-bar form-control"
                 />
@@ -71,7 +63,7 @@ class Navbar extends React.Component {
                 </a>
                 <ul className="dropdown-menu">
                   <li>
-                    <form onSubmit={this.postFolder}>
+                    <form onSubmit={this.onAddFolder}>
                       <input
                         className="form-control"
                         placeholder="Add Folder"
@@ -91,12 +83,4 @@ class Navbar extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    folders: state.folders,
-  };
-};
-
-const Container = connect(mapStateToProps)(Navbar);
-
-module.exports = Container;
+module.exports = Navbar;
