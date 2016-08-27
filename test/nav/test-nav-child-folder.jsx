@@ -1,12 +1,14 @@
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
+import chai from 'chai';
 import { Provider } from 'react-redux';
-import { should } from 'chai';
-import store from '../src/js/redux/store';
-import NavChildFolder from '../src/js/nav/nav-child-folder';
+import store from '../../src/js/redux/store';
+import NavChildFolder from '../../src/js/nav/nav-child-folder';
+
+const should = chai.should();
 
 describe('Nav Child Folder', () => {
-  it('Renders the intial NavChildFolder component', () => {
+  it('Renders the initial NavChildFolder component', () => {
     const show = false;
     const folder = {
       foldername: 'folder',
@@ -29,5 +31,7 @@ describe('Nav Child Folder', () => {
     );
 
     const result = renderer.getRenderOutput();
+    console.log(result);
+    result.type.should.equal(NavChildFolder);
   });
 });

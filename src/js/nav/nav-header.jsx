@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 import actions from '../redux/actions';
 import Folder from './nav-folder-container';
-import BookmarkForm from '../content/bookmark-form';
+import BookmarkFormContainer from '../content/bookmark-form-container';
 
 class Navbar extends React.Component {
   constructor() {
@@ -45,7 +45,7 @@ class Navbar extends React.Component {
                 </a>
 
                 <div className="modal fade" id="add-form">
-                  <BookmarkForm />
+                  <BookmarkFormContainer />
                 </div>
               </li>
             </ul>

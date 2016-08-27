@@ -1,6 +1,4 @@
-import { connect } from 'react-redux';
 import React from 'react';
-import actions from '../redux/actions';
 import Folder from './bookmark-form-folder';
 
 class BookmarkForm extends React.Component {
@@ -10,13 +8,13 @@ class BookmarkForm extends React.Component {
   }
 
   addBookmark() {
-    this.props.dispatch(actions.addBookmark({
+    this.props.onAdd({
       url: this.url.value,
       title: this.title.value,
       description: this.description.value,
       folderid: this.folder.value,
       screenshot: this.screenshot.value,
-    }));
+    });
 
     this.url.value = '';
     this.title.value = '';
@@ -135,12 +133,4 @@ class BookmarkForm extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    folders: state.folders,
-  };
-};
-
-const Container = connect(mapStateToProps)(BookmarkForm);
-
-module.exports = Container;
+module.exports = BookmarkForm;
