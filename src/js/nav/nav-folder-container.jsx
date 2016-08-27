@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import actions from '../redux/actions';
-import FolderNav from './nav-child-folder';
+import FolderNav from './nav-folder';
 
 class FolderContainer extends React.Component {
   constructor() {
@@ -15,6 +15,7 @@ class FolderContainer extends React.Component {
   }
 
   onDelete(id) {
+    console.log(id);
     this.props.dispatch(actions.deleteFolder(id));
   }
 

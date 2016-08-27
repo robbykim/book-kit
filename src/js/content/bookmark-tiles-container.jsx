@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import BookmarkTiles from './bookmark-tiles';
-import Tile from './bookmark-child-tile';
+import Tile from './bookmark-tiles-child';
 
 function BookmarkTilesContainer(props) {
   let tileArr = [];
