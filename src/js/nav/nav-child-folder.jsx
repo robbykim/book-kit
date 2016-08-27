@@ -1,24 +1,7 @@
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
 import React from 'react';
-import actions from '../redux/actions';
+import { Link } from 'react-router';
 
 class Folder extends React.Component {
-  constructor() {
-    super();
-    this.onEdit = this.onEdit.bind(this);
-  }
-
-  onDelete(id) {
-    this.props.dispatch(actions.deleteFolder(id));
-  }
-
-  onEdit(id, folderName, event) {
-    event.preventDefault();
-    this.props.dispatch(actions.editFolder(id, folderName));
-    this.props.onShowEdit();
-  }
-
   render() {
     let textStyle = this.props.show ? { display: 'none' } : {};
     let inputStyle = this.props.show ? {} : { display: 'none' };
@@ -29,7 +12,7 @@ class Folder extends React.Component {
         </Link>
         <form
           onSubmit={() => {
-            this.onEdit(
+            this.props.onEdit(
               this.props.folder.folderid,
               this.editedFolder.value,
               event
@@ -49,7 +32,7 @@ class Folder extends React.Component {
           aria-hidden="true"
         />
         <span
-          onClick={() => { this.onDelete(this.props.folder.folderid); }}
+          onClick={() => { this.props.onDelete(this.props.folder.folderid); }}
           className="glyphicon glyphicon-trash"
           aria-hidden="true"
         />
@@ -58,6 +41,4 @@ class Folder extends React.Component {
   }
 }
 
-const Container = connect()(Folder);
-
-module.exports = Container;
+module.exports = Folder;
