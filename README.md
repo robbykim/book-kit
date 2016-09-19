@@ -12,7 +12,7 @@ Disclaimer: This project is mainly built for learning purposes and not intended 
 
 #### Scenario 1:
 
-Sierra and Robby are in a class where all of their bookmarks and resources are gobbled up by Slack. Therefore Sierra and Robby need a way to track these learning resources. They have a bookmark folder in their Chrome browser that "save" the resources but are not very descriptive and very hard to sort through. Sierra and Robby go to bookmarkproject.com (CHANGE THIS) and make accounts in order to organize their resources for later review.
+Sierra and Robby are in a class where all of their bookmarks and resources are gobbled up by Slack. Therefore Sierra and Robby need a way to track these learning resources. They have a bookmark folder in their Chrome browser that "save" the resources but are not very descriptive and very hard to sort through. Sierra and Robby go to bookmarkproject.example.com and make accounts in order to organize their resources for later review.
 
 #### Scenario 2:
 
@@ -99,12 +99,33 @@ Searching
 
 - Filtering --- View certain folders/tags by themselves
 
-## version 1.1
+## version 1.1 (MVP By Friday 9/26)
 
-Landing page
+- [] Landing page
 
-User accounts
+- [] User accounts
 
-- separate set of data per account
-- authentication
-- sharing
+  - separate set of data per account
+  - authentication
+  - sharing
+
+- [] Combine repos
+
+## Possible additional features
+
+- Group corporation on folder content (sharing a folder between multiple users)
+
+  - Cannot edit other people's bookmarks
+
+- uploading and storing screenshots in the database
+
+- Chrome extension?
+
+  - Pull info from page
+  - example: <http://bookit.thinkful.example/create?url=http%2a%2a%2fetc.etc.etc%2f&title=Example+Bookmark>
+  - Seperate window or popup window
+  -
+
+- Update design to match Thinkful's style guide.
+- Use embed links from YouTube/other video sites
+- Grab info from website, i.e. metadata
