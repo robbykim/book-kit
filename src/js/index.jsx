@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import routes from './routes/routes';
 import store from './redux/store';
-import { Provider } from 'react-redux';
+
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
