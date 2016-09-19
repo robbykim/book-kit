@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import actions from '../redux/actions';
-import FolderNav from './nav-folder';
+import NavFolder from './nav-folder';
 
 class FolderContainer extends React.Component {
   constructor() {
@@ -15,7 +15,8 @@ class FolderContainer extends React.Component {
   }
 
   onDelete(id) {
-    console.log(id);
+    // FIXME: issue when deleting a folder that is being used by a bookmark
+    // it doesn't fail gracefully. should warn the user
     this.props.dispatch(actions.deleteFolder(id));
   }
 
@@ -33,7 +34,7 @@ class FolderContainer extends React.Component {
 
   render() {
     return (
-      <FolderNav
+      <NavFolder
         show={this.state.show}
         onShowEdit={this.onShowEdit}
         onDelete={this.onDelete}
