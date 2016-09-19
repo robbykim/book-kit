@@ -1,38 +1,50 @@
 import React from 'react';
-import FolderNav from './nav-child-folder';
+import { connect } from 'react-redux';
+import actions from '../redux/actions';
+import NavFolder from './nav-folder';
 
 class FolderContainer extends React.Component {
-  constructor () {
+  constructor() {
     super();
     this.onShowEdit = this.onShowEdit.bind(this);
+    this.onEdit = this.onEdit.bind(this);
+    this.onDelete = this.onDelete.bind(this);
     this.state = {
-      show: false
+      show: false,
     };
   }
-  onShowEdit () {
+
+  onDelete(id) {
+    // FIXME: issue when deleting a folder that is being used by a bookmark
+    // it doesn't fail gracefully. should warn the user
+    this.props.dispatch(actions.deleteFolder(id));
+  }
+
+  onEdit(id, folderName, event) {
+    event.preventDefault();
+    this.props.dispatch(actions.editFolder(id, folderName));
+    this.onShowEdit();
+  }
+
+  onShowEdit() {
     this.setState({
-      show: !this.state.show
+      show: !this.state.show,
     });
   }
-  render () {
-    return <FolderNav show={this.state.show} onShowEdit={this.onShowEdit} folder={this.props.folder} />;
+
+  render() {
+    return (
+      <NavFolder
+        show={this.state.show}
+        onShowEdit={this.onShowEdit}
+        onDelete={this.onDelete}
+        onEdit={this.onEdit}
+        folder={this.props.folder}
+      />
+    );
   }
 }
 
-// const FolderContainer = React.createClass({
-//   getInitialState: function () {
-//     return {
-//       show: false
-//     };
-//   },
-//   onShowEdit: function () {
-//     this.setState({
-//       show: !this.state.show
-//     });
-//   },
-//   render: function () {
-//     return <FolderNav show={this.state.show} onShowEdit={this.onShowEdit} folder={this.props.folder} />;
-//   }
-// });
+const Container = connect()(FolderContainer);
 
-module.exports = FolderContainer;
+module.exports = Container;
